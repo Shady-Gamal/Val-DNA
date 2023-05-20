@@ -1,4 +1,4 @@
-package com.example.valorant.ui.AgentInfoScreen
+package com.example.valorant.ui.agentDetails_screen
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -8,13 +8,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.example.valorant.ui.agents_screen.AgetnsViewModel
 
 @Composable
 fun AgentsInfoScreen(
     navController: NavController,
 
-    viewModel: AgentInfoViewModel = hiltViewModel()
+    viewModel: AgentDetailsViewModel = hiltViewModel()
 ) {
 
     val selectedAgentState = viewModel.selectedAgentState

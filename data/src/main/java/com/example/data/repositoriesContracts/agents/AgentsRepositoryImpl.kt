@@ -19,7 +19,6 @@ val context : Context) : AgentsRepository {
 
 
        if (isOnline(context)){
-
            agentsOnlineDataSource.getAgents()
            return agentsOfflineDataSource.getAgents()
 

@@ -2,9 +2,7 @@ package com.example.data.database
 
 import androidx.room.ProvidedTypeConverter
 import androidx.room.TypeConverter
-import com.example.data.model.AbilitiesItem
-import com.example.data.model.Role
-import com.example.data.model.VoiceLine
+import com.example.data.model.*
 import com.example.data.util.JsonParser
 import com.google.gson.reflect.TypeToken
 
@@ -16,7 +14,7 @@ class Converters(val jsonParser: JsonParser) {
         return jsonParser.fromJson<Role>(
             json = json,
             object : TypeToken<Role>(){}.type
-        ) ?: Role("")
+        ) ?: Role()
     }
     @TypeConverter
     fun toRole(roles :Role) : String{
@@ -64,7 +62,7 @@ class Converters(val jsonParser: JsonParser) {
         return jsonParser.fromJson<VoiceLine>(
             json,
             object : TypeToken<VoiceLine>(){}.type
-        ) ?: VoiceLine("")
+        ) ?: VoiceLine()
     }
 
     @TypeConverter
@@ -75,10 +73,55 @@ class Converters(val jsonParser: JsonParser) {
         ) ?: "[]"
     }
 
+    @TypeConverter
+    fun fromSkinsItemJson(json: String): List<SkinsItem> {
+        return jsonParser.fromJson<ArrayList<SkinsItem>>(
+            json,
+            object : TypeToken<ArrayList<SkinsItem>>(){}.type
+        ) ?: emptyList()
+    }
+
+    @TypeConverter
+    fun toSkinsItemJson(meanings: List<SkinsItem>?): String {
+        return jsonParser.toJson(
+            meanings,
+            object : TypeToken<ArrayList<SkinsItem>>(){}.type
+        ) ?: "[]"
+    }
 
 
+    @TypeConverter
+    fun fromShopDataJson(json: String): ShopData {
+        return jsonParser.fromJson<ShopData>(
+            json,
+            object : TypeToken<ShopData>(){}.type
+        ) ?: ShopData()
+    }
+
+    @TypeConverter
+    fun toShopDataJson(meanings: ShopData?): String {
+        return jsonParser.toJson(
+            meanings,
+            object : TypeToken<ShopData>(){}.type
+        ) ?: "[]"
+    }
 
 
+    @TypeConverter
+    fun fromWeaponStatsJson(json: String): WeaponStats {
+        return jsonParser.fromJson<WeaponStats>(
+            json,
+            object : TypeToken<WeaponStats>(){}.type
+        ) ?: WeaponStats()
+    }
+
+    @TypeConverter
+    fun toWeaponStatsJson(meanings: WeaponStats?): String {
+        return jsonParser.toJson(
+            meanings,
+            object : TypeToken<WeaponStats>(){}.type
+        ) ?: "[]"
+    }
 
 
 }

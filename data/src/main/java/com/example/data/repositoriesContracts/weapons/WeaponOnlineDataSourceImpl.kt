@@ -1,5 +1,6 @@
 package com.example.data.repositoriesContracts.weapons
 
+import com.example.data.database.ValorantDatabase
 import com.example.data.model.toWeaponItemDTO
 import com.example.data.repositoriesContracts.WebServices
 import com.example.domain.entities.Resource
@@ -12,9 +13,12 @@ import kotlinx.coroutines.flow.onStart
 import retrofit2.Response
 import javax.inject.Inject
 
-class WeaponOnlineDataSourceImpl @Inject constructor(val webServices: WebServices) : WeaponsOnlineDataSource {
+class WeaponOnlineDataSourceImpl @Inject constructor(val webServices: WebServices,
+val valorantDatabase: ValorantDatabase) : WeaponsOnlineDataSource {
     override suspend fun getWeapons(): Flow<Resource<List<WeaponItemDTO>>> {
         val response = webServices.getWeapons()
+
+        response.data?.let { valorantDatabase.getWeaponsDAO().saveWeapons(it) }
 
         return flow<Resource<List<WeaponItemDTO>>>{
 

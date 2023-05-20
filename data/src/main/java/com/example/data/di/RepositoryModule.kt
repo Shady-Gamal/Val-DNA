@@ -1,10 +1,12 @@
 package com.example.data.di
 
 import com.example.data.repositoriesContracts.agents.AgentsRepositoryImpl
+import com.example.data.repositoriesContracts.bundles.BundlesRepositoryImpl
 import com.example.data.repositoriesContracts.maps.MapsOnlineDataSourceImpl
 import com.example.data.repositoriesContracts.maps.MapsRepositoryImpl
 import com.example.data.repositoriesContracts.weapons.WeaponsRepositoryImpl
 import com.example.domain.repository.AgentsRepository
+import com.example.domain.repository.BundlesRepository
 import com.example.domain.repository.MapsRepository
 import com.example.domain.repository.WeaponsRepository
 import dagger.Binds
@@ -29,4 +31,11 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun bindMapsRepository(mapsRepositoryImpl: MapsRepositoryImpl) : MapsRepository
+
+
+    @Singleton
+    @Binds
+    abstract fun bindBundlesRepository(bundlesRepositoryImpl: BundlesRepositoryImpl) : BundlesRepository
+
+
 }

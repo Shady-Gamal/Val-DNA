@@ -6,9 +6,13 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.example.valorant.ui.AgentInfoScreen.AgentsInfoScreen
+import com.example.valorant.ui.agentDetails_screen.AgentsInfoScreen
 import com.example.valorant.ui.agents_screen.AgentsScreen
+import com.example.valorant.ui.buddies_screen.BuddiesScreen
+import com.example.valorant.ui.bundles_screen.BundlesScreen
 import com.example.valorant.ui.home_screen.HomeScreen
+import com.example.valorant.ui.playerCards_screen.PlayerCardsScreen
+import com.example.valorant.ui.sprays_screen.SpraysScreen
 import com.example.valorant.ui.weapons_Screen.WeaponsScreen
 
 
@@ -23,7 +27,7 @@ fun Navigation(navController: NavHostController) {
 
             AgentsScreen(navController = navController)
         }
-        composable(route = Screen.AgentInfoScreen.route + "/{agentId}", arguments = listOf(
+        composable(route = Screen.AgentDetailsScreen.route + "/{agentId}", arguments = listOf(
             navArgument("agentId"){
                 type = NavType.StringType
             }
@@ -34,6 +38,26 @@ fun Navigation(navController: NavHostController) {
             
             WeaponsScreen(navController = navController, )
         }
+
+            composable(route = Screen.BundlesScreen.route){
+
+                BundlesScreen(navController = navController)
+            }
+
+        composable(route = Screen.PlayerCardsScreen.route){
+
+            PlayerCardsScreen(navController = navController)
+        }
+        composable(route = Screen.SpraysScreen.route){
+
+            SpraysScreen(navController = navController)
+        }
+        composable(route = Screen.BuddiesScreen.route){
+
+            BuddiesScreen(navController = navController)
+        }
+
+
     }
 
 

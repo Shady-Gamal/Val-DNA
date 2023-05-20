@@ -1,7 +1,10 @@
 package com.example.valorant.ui.home_screen
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.valorant.ui.home_screen.components.ViewPager
@@ -16,7 +19,7 @@ fun HomeScreen(
 
     ) {
 
-    val state = viewModel.state
+    val state = viewModel.Homestate
 
     Column {
         ViewPager(state = state)

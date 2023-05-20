@@ -2,6 +2,7 @@ package com.example.valorant.ui.home_screen.components
 
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 
 
@@ -32,7 +33,7 @@ fun WeaponsLazyRow(state : HomeState) {
         , modifier = Modifier.padding(bottom = 5.dp))
     
         LazyRow(){
-        items(state.weaponsInfo?.size ?: 0){
+        items(6){
             Card(modifier = Modifier
                 .width(200.dp)
                 .height(120.dp)
@@ -41,19 +42,30 @@ fun WeaponsLazyRow(state : HomeState) {
                 Box(
                     modifier = Modifier
                         .background(color = PinkForLazyRows)
-                        .fillMaxSize()) {
+                        .fillMaxSize()
+                        .clickable {  }) {
+                    
+                    if(it == 5 ){
 
-                     Text(text = state.weaponsInfo?.get(it)?.displayName ?: "Unknown" ,
-                     modifier = Modifier
-                         .align(TopCenter)
-                         .padding(top = 5.dp))
-                    Spacer(modifier = Modifier.height(10.dp))
+                        Text(text = "See More")
+                    }
+                    else {
+                        Text(
+                            text = state.weaponsInfo?.get(it)?.displayName ?: "Unknown",
+                            modifier = Modifier
+                                .align(TopCenter)
+                                .padding(top = 5.dp)
+                        )
+                        Spacer(modifier = Modifier.height(10.dp))
 
-                    AsyncImage(model = state.weaponsInfo?.get(it)?.displayIcon, contentDescription = null
-                    , modifier = Modifier
-                            .align(Center)
-                            .sizeIn(maxWidth = 180.dp, maxHeight = 70.dp)
-                    )
+                        AsyncImage(
+                            model = state.weaponsInfo?.get(it)?.displayIcon,
+                            contentDescription = null,
+                            modifier = Modifier
+                                .align(Center)
+                                .sizeIn(maxWidth = 180.dp, maxHeight = 70.dp)
+                        )
+                    }
                 }
             }
 

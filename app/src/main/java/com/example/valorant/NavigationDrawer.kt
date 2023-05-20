@@ -26,11 +26,8 @@ fun drawerHeader(modifier: Modifier = Modifier) {
         .height(300.dp)
         .fillMaxWidth(),
         contentAlignment = Alignment.Center
-
-
     ){
-
-       Image(painter = painterResource(id = R.drawable.logo), contentDescription = null,
+        Image(painter = painterResource(id = R.drawable.logo), contentDescription = null,
        )
 
     }
@@ -40,11 +37,8 @@ fun drawerHeader(modifier: Modifier = Modifier) {
 fun drawerBody(
         items : List<MenuItem>,
         modifier: Modifier = Modifier,
-        itemTextStyle : TextStyle = TextStyle(fontSize = 18.sp),
         onItemClick: (MenuItem) -> Unit,
-
-
-) {
+        ) {
     LazyColumn{
         items(items){item ->
             Row(modifier = Modifier
@@ -61,10 +55,7 @@ fun drawerBody(
                modifier = Modifier.weight(1f),
                color = Color.White
            )
-
-        }
-
-
+            }
         }
     }
 }

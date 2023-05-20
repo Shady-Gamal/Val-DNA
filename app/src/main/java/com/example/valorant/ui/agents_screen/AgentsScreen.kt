@@ -1,9 +1,6 @@
 package com.example.valorant.ui.agents_screen
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.valorant.Screen
@@ -19,7 +16,7 @@ fun AgentsScreen(
 
     AgentsLazyGrid(agentsState = agentsState,
     onItemClick = {
-        navController.navigate(route = Screen.AgentInfoScreen.route + "/${it.uuid}")
+        navController.navigate(route = Screen.AgentDetailsScreen.route + "/${it.uuid}")
     }
         )
 }

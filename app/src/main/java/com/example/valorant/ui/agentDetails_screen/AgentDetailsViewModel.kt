@@ -1,22 +1,19 @@
-package com.example.valorant.ui.AgentInfoScreen
+package com.example.valorant.ui.agentDetails_screen
 
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.domain.entities.AgentItemDTO
 import com.example.domain.entities.Resource
 import com.example.domain.usecases.GetSelectedAgentUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class AgentInfoViewModel @Inject constructor(
+class AgentDetailsViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     private val getSelectedAgentUseCase: GetSelectedAgentUseCase
 ) : ViewModel() {

@@ -17,13 +17,13 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    val getAgentsUseCase: GetAgentsUseCase,
-    val getWeaponsUseCase: GetWeaponsUseCase,
-    val getMapsUseCase: GetMapsUseCase,
+    private val getAgentsUseCase: GetAgentsUseCase,
+    private val getWeaponsUseCase: GetWeaponsUseCase,
+    private val getMapsUseCase: GetMapsUseCase,
 
-) : ViewModel() {
+    ) : ViewModel() {
 
-    var state by mutableStateOf(HomeState())
+    var Homestate by mutableStateOf(HomeState())
         private set
     init {
         getAgents()
@@ -36,18 +36,18 @@ class HomeViewModel @Inject constructor(
                 when (it){
 
                     is Resource.Success -> {
-                        state = state.copy(
+                        Homestate = Homestate.copy(
                             agentsInfo = it.data
                         )
-                        Log.e("tag", state.agentsInfo?.size.toString() )
+                        Log.e("tag", Homestate.agentsInfo?.size.toString() )
                     }
                     is Resource.Error -> {
-                        state = state.copy(
+                        Homestate = Homestate.copy(
                             error = it.message
                         )
                         Log.e("tag", it.message.toString())
                     }
-                    is Resource.Loading -> state = state.copy(
+                    is Resource.Loading -> Homestate = Homestate.copy(
                         isLoading = true
                     )
                 }
@@ -60,13 +60,13 @@ class HomeViewModel @Inject constructor(
             getWeaponsUseCase.invoke().collect{
                 when (it){
 
-                    is Resource.Success -> state = state.copy(
+                    is Resource.Success -> Homestate = Homestate.copy(
                         weaponsInfo = it.data
                     )
-                    is Resource.Loading -> state = state.copy(
+                    is Resource.Loading -> Homestate = Homestate.copy(
                         isLoading = true
                     )
-                    is Resource.Error -> state = state.copy(
+                    is Resource.Error -> Homestate = Homestate.copy(
 
                         error = it.message
                     )
@@ -82,14 +82,14 @@ viewModelScope.launch {
 
         when (it){
 
-            is Resource.Success -> state = state.copy(
+            is Resource.Success -> Homestate = Homestate.copy(
                 mapsInfo = it.data
             )
-            is Resource.Error -> state = state.copy(
+            is Resource.Error -> Homestate = Homestate.copy(
 
                 error = it.message
             )
-            is Resource.Loading -> state = state.copy(
+            is Resource.Loading -> Homestate = Homestate.copy(
 
                 isLoading = true
             )

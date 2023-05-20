@@ -1,5 +1,8 @@
 package com.example.data.model
 
+import androidx.room.DatabaseView
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.example.domain.entities.WeaponItemDTO
 import com.google.gson.annotations.SerializedName
 
@@ -20,7 +23,7 @@ data class AirBurstStats(
 	@field:SerializedName("burstDistance")
 	val burstDistance: Any? = null
 )
-
+@Entity
 data class WeaponsDataItem(
 
 	@field:SerializedName("skins")
@@ -50,8 +53,9 @@ data class WeaponsDataItem(
 	@field:SerializedName("category")
 	val category: String? = null,
 
+	@PrimaryKey
 	@field:SerializedName("uuid")
-	val uuid: String? = null
+	val uuid: String
 )
 
 data class DamageRangesItem(

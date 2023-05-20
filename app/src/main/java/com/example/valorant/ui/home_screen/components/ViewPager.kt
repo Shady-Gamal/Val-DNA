@@ -45,7 +45,7 @@ fun ViewPager(
 
 
     Card(shape = RoundedCornerShape(10.dp),
-        modifier = Modifier.padding(10.dp)
+        modifier = modifier.padding(10.dp)
 
     ) {
         if (!(state.agentsInfo.isNullOrEmpty())){
@@ -91,7 +91,7 @@ fun ViewPager(
                                 fontWeight = FontWeight.Bold,
                                 color = WhiteForTitleText
                             )
-                            Spacer(modifier = modifier.width(4.dp))
+                            Spacer(modifier = Modifier.width(4.dp))
                             Text(
                                 text = state.agentsInfo?.get(page)?.role?.displayName
                                     ?: "Baiter", color = WhiteForTitleText

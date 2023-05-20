@@ -1,5 +1,6 @@
 package com.example.data.repositoriesContracts.agents
 
+import android.util.Log
 import com.example.data.database.ValorantDatabase
 import com.example.data.model.AgentsDataItem
 import com.example.data.model.toAgentItemDTO
@@ -23,6 +24,7 @@ class AgentsOfflineDataSourceImpl @Inject constructor(val valorantDatabase: Valo
         }.onStart {
             emit(Resource.Loading())
         }.catch {
+
             emit(Resource.Error(it.message ?: "error"))
         }
     }

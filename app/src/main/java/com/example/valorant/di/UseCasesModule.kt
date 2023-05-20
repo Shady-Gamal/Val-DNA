@@ -1,12 +1,10 @@
 package com.example.valorant.di
 
 import com.example.domain.repository.AgentsRepository
+import com.example.domain.repository.BundlesRepository
 import com.example.domain.repository.MapsRepository
 import com.example.domain.repository.WeaponsRepository
-import com.example.domain.usecases.GetAgentsUseCase
-import com.example.domain.usecases.GetMapsUseCase
-import com.example.domain.usecases.GetSelectedAgentUseCase
-import com.example.domain.usecases.GetWeaponsUseCase
+import com.example.domain.usecases.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -43,7 +41,13 @@ object UseCasesModule {
     @Singleton
     @Provides
     fun provideSelectedAgentUseCase(agentsRepository: AgentsRepository) : GetSelectedAgentUseCase{
-
         return GetSelectedAgentUseCase(agentsRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideBundlesUseCase(bundlesRepository: BundlesRepository) : GetBundlesUseCase{
+
+        return GetBundlesUseCase(bundlesRepository)
     }
 }

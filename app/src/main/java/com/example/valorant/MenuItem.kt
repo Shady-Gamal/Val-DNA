@@ -14,5 +14,8 @@ val navigationList : List<MenuItem> = listOf(
     MenuItem(Screen.AgentScreen.route,"Agents", R.drawable.agents),
     MenuItem("Screen","Maps", R.drawable.maps),
     MenuItem(Screen.WeaponsScreen.route ,"Guns", R.drawable.guns),
-    MenuItem("Seemore","See More", R.drawable.seemore)
+    MenuItem(Screen.BundlesScreen.route,"BundlesRepository", R.drawable.seemore),
+    MenuItem(Screen.SpraysScreen.route,"Sprays", R.drawable.seemore),
+    MenuItem(Screen.PlayerCardsScreen.route,"playercards", R.drawable.seemore),
+    MenuItem(Screen.BuddiesScreen.route,"BuddiesScreen", R.drawable.seemore)
 )
