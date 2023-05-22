@@ -5,6 +5,7 @@ import android.os.Parcelable
 import androidx.annotation.NonNull
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.example.domain.entities.AbilitiesItemDTO
 import com.example.domain.entities.AgentItemDTO
 import com.example.domain.entities.RoleDTO
 
@@ -162,7 +163,11 @@ fun AgentsDataItem.toAgentItemDTO() : AgentItemDTO {
 		background = background,
 		description = description,
 		displayIcon = displayIcon,
-		uuid = uuid
+		uuid = uuid,
+		backgroundGradientColors = backgroundGradientColors,
+		abilities = abilities?.map {
+			it?.toAbilityItemDTO()
+		}
 		)
 }
 
@@ -176,4 +181,15 @@ fun Role.toRoleDTO() : RoleDTO{
 		uuid= uuid
 	)
 }
+fun AbilitiesItem.toAbilityItemDTO() : AbilitiesItemDTO{
+	return AbilitiesItemDTO(
+		displayIcon = displayIcon,
+		slot = slot,
+		description = description,
+		displayName = displayName
+	)
+
+}
+
+
 

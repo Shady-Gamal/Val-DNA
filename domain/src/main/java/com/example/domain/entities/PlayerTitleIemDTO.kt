@@ -1,6 +1,6 @@
 package com.example.domain.entities
 
-data class PlayerTitleDTO(
+data class PlayerTitleIemDTO(
 
 
     val displayName: String? = null,

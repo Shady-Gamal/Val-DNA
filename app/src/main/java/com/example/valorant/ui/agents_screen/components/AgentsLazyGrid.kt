@@ -1,22 +1,28 @@
 package com.example.valorant.ui.agents_screen.components
-
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.scale
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.example.domain.entities.AgentItemDTO
-import com.example.valorant.MenuItem
 import com.example.valorant.ui.agents_screen.AgentsState
-import com.example.valorant.ui.theme.PinkForLazyRows
-import com.example.valorant.ui.weapons_Screen.WeaponState
 
 
 @Composable
@@ -25,33 +31,80 @@ fun AgentsLazyGrid(
     onItemClick: (AgentItemDTO) -> Unit
 
 ) {
+    val boxSize = with(LocalDensity.current) { 200.dp.toPx() }
     LazyVerticalGrid(columns = GridCells.Fixed(2), content = {
 
         items(agentsState.agentsInfo?.size ?: 0){
 
             Card(modifier = Modifier
+                .padding(10.dp)
                 .width(200.dp)
-                .height(120.dp)
-                .padding(end = 10.dp)
+                .height(180.dp)
                 .clickable {
                     onItemClick(agentsState.agentsInfo?.get(it)!!)
                 }
+            ,
             ) {
-                Box(
+                Row(
                     modifier = Modifier
-                        .background(color = PinkForLazyRows)
-                        .fillMaxSize()) {
+                        .background(
+                            brush = Brush.verticalGradient(
+                                colors = listOf(
+                                    Color(
+                                        android.graphics.Color.parseColor(
+                                            "#" + agentsState.agentsInfo?.get(
+                                                it
+                                            )?.backgroundGradientColors
+                                                ?.get(3)
+                                                ?.substring(0, 6)
+                                        )
+                                    ),
+                                    Color(
+                                        android.graphics.Color.parseColor(
+                                            "#" + agentsState.agentsInfo?.get(
+                                                it
+                                            )?.backgroundGradientColors
+                                                ?.get(0)
+                                                ?.substring(0, 6)
+                                        )
+                                    )
+                                )
+                            ),
+                        )
+                        .fillMaxSize()
+                        .clip(RoundedCornerShape(0.dp))
 
-                    Text(text = agentsState.agentsInfo?.get(it)?.displayName ?: "Unknown" ,
-                        modifier = Modifier
-                            .align(Alignment.TopCenter)
-                            .padding(top = 5.dp))
-                    Spacer(modifier = Modifier.height(10.dp))
+                ) {
 
-                    AsyncImage(model = agentsState.agentsInfo?.get(it)?.displayIcon, contentDescription = null
+                    Column(modifier = Modifier
+                        .fillMaxHeight()
+                        .padding(start = 5.dp),
+                    verticalArrangement = Arrangement.Center) {
+                        Text(text = agentsState.agentsInfo?.get(it)?.displayName ?: "Unknown" ,
+                            modifier = Modifier
+                                .padding(top = 5.dp),
+                         color = Color.White,
+                        fontWeight = FontWeight.Bold
+                        )
+
+                        Text(text = agentsState.agentsInfo?.get(it)?.role?.displayName ?: "Unknown" ,
+                            modifier = Modifier
+                                .padding( 5.dp),
+                            color = Color.White)
+
+                    }
+
+
+
+                    AsyncImage(model = agentsState.agentsInfo?.get(it)?.fullPortrait, contentDescription = null
                         , modifier = Modifier
-                            .align(Alignment.Center)
-                            .sizeIn(maxWidth = 180.dp, maxHeight = 70.dp)
+                            .scale(1.5f)
+                            .offset(y = (30).dp)
+                            ,
+                        contentScale = ContentScale.FillHeight
+
+
+
                     )
                 }
             }
@@ -63,3 +116,5 @@ fun AgentsLazyGrid(
 
     })
 }
+val String.color
+    get() = Color(android.graphics.Color.parseColor(this))

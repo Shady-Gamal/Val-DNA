@@ -10,7 +10,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.onStart
-import retrofit2.Response
 import javax.inject.Inject
 
 class WeaponOnlineDataSourceImpl @Inject constructor(val webServices: WebServices,
@@ -18,7 +17,7 @@ val valorantDatabase: ValorantDatabase) : WeaponsOnlineDataSource {
     override suspend fun getWeapons(): Flow<Resource<List<WeaponItemDTO>>> {
         val response = webServices.getWeapons()
 
-        response.data?.let { valorantDatabase.getWeaponsDAO().saveWeapons(it) }
+        response.data?.let { valorantDatabase.getWeaponsDao().saveWeapons(it) }
 
         return flow<Resource<List<WeaponItemDTO>>>{
 

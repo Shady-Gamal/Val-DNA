@@ -2,7 +2,6 @@ package com.example.valorant
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.width
@@ -15,16 +14,11 @@ import androidx.compose.ui.draw.paint
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.findNavController
-import com.example.valorant.ui.home_screen.HomeViewModel
 import com.example.valorant.ui.theme.ValorantTheme
-import dagger.hilt.EntryPoint
-import dagger.hilt.InstallIn
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import javax.inject.Singleton
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -48,7 +42,10 @@ class MainActivity : ComponentActivity() {
                             drawerHeader()
                             drawerBody(items =
                        navigationList,
-                                onItemClick = {navController.navigate(route = it.id)
+                                onItemClick = {navController.navigate(route = it.id){
+                                    popUpTo(navController.graph.findStartDestination().id)
+                                    launchSingleTop = true
+                                }
                                 scope.launch { drawerState.close() }
                                 }
                             )}

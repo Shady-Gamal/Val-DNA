@@ -18,8 +18,6 @@ interface AgentsDao {
  @Insert(onConflict = OnConflictStrategy.REPLACE)
  suspend fun saveAgents(Agents : List<AgentsDataItem>)
 
-    @Query("SELECT (SELECT COUNT(*) FROM AgentsDataItem) == 0")
-   suspend fun isEmpty(): Boolean
 
    @Query("Select * from AgentsDataITem Where uuid = :agentUUID ")
    suspend fun getSelectedAgent(agentUUID : String) : AgentsDataItem

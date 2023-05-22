@@ -15,10 +15,7 @@ interface WeaponsDao {
     suspend fun getWeapons() : List<WeaponsDataItem>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun saveWeapons (Weapons : List<WeaponsDataItem>)
-
-    @Query("SELECT (SELECT COUNT(*) FROM WeaponsDataItem) == 0")
-    suspend fun isEmpty(): Boolean
+    suspend fun saveWeapons (weapons : List<WeaponsDataItem>)
 
     @Query("Select * from WeaponsDataItem Where uuid = :weaponUUID ")
     suspend fun getSelectedAgent(weaponUUID : String) : WeaponsDataItem

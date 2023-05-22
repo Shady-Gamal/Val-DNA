@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 data class SpraysResponse(
 
 	@field:SerializedName("data")
-	val data: List<SpraysDataItem?>? = null,
+	val data: List<SpraysDataItem>? = null,
 
 	@field:SerializedName("status")
 	val status: Int? = null

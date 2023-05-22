@@ -1,17 +1,20 @@
 package com.example.data.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.example.domain.entities.BuddyItemDTO
 import com.google.gson.annotations.SerializedName
 
 data class BuddiesResponse(
 
 	@field:SerializedName("data")
-	val data: List<BuddiesDataItem?>? = null,
+	val data: List<BuddiesDataItem>? = null,
 
 	@field:SerializedName("status")
 	val status: Int? = null
 )
 
+@Entity
 data class BuddiesDataItem(
 
 	@field:SerializedName("displayIcon")
@@ -23,11 +26,12 @@ data class BuddiesDataItem(
 	@field:SerializedName("assetPath")
 	val assetPath: String? = null,
 
+	@PrimaryKey
 	@field:SerializedName("uuid")
-	val uuid: String? = null,
+	val uuid: String,
 
 	@field:SerializedName("themeUuid")
-	val themeUuid: Any? = null,
+	val themeUuid: String? = null,
 
 	@field:SerializedName("isHiddenIfNotOwned")
 	val isHiddenIfNotOwned: Boolean? = null,

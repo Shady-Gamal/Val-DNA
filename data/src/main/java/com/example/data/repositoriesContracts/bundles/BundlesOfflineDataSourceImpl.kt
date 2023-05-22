@@ -1,14 +1,10 @@
 package com.example.data.repositoriesContracts.bundles
 
-import android.os.Bundle
 import android.util.Log
 import com.example.data.database.ValorantDatabase
-import com.example.data.model.toAgentItemDTO
 import com.example.data.model.toBundleItemDTO
-import com.example.domain.entities.AgentItemDTO
 import com.example.domain.entities.BundleItemDTO
 import com.example.domain.entities.Resource
-import com.example.domain.repository.AgentsOfflineDataSource
 import com.example.domain.repository.BundlesOfflineDataSource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
@@ -21,14 +17,14 @@ class BundlesOfflineDataSourceImpl @Inject constructor(val valorantDatabase: Val
     override suspend fun getBundles(): Flow<Resource<List<BundleItemDTO>>> {
 
         return flow<Resource<List<BundleItemDTO>>> {
-            emit( Resource.Success(valorantDatabase.getBundlesDAO().getBundles().map{
+            emit( Resource.Success(valorantDatabase.getBundlesDao().getBundles().map{
                 it.toBundleItemDTO()
             }
             ))
         }.onStart {
             emit(Resource.Loading())
         }.catch {
-
+            Log.e("tag", it.message ?: "null" )
             emit(Resource.Error(it.message ?: "error"))
         }
     }

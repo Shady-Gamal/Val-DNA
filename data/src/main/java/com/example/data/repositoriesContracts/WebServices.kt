@@ -27,5 +27,8 @@ interface WebServices {
    @GET("playertitles")
    suspend fun getPlayerTitles() : PlayerTitlesResponse
 
+   @GET("playercards")
+   suspend fun getPlayerCards() : PlayerCardsResponse
+
 
 }

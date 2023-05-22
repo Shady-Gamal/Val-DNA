@@ -17,7 +17,7 @@ class Converters(val jsonParser: JsonParser) {
         ) ?: Role()
     }
     @TypeConverter
-    fun toRole(roles :Role) : String{
+    fun toRole(roles :Role?) : String{
         return jsonParser.toJson(
             roles,
             object : TypeToken<Role>(){}.type
@@ -120,6 +120,21 @@ class Converters(val jsonParser: JsonParser) {
         return jsonParser.toJson(
             meanings,
             object : TypeToken<WeaponStats>(){}.type
+        ) ?: "[]"
+    }
+    @TypeConverter
+    fun fromBuddiesLevelItemJson(json: String): List<BuddiesLevelsItem> {
+        return jsonParser.fromJson<ArrayList<BuddiesLevelsItem>>(
+            json,
+            object : TypeToken<ArrayList<BuddiesLevelsItem>>(){}.type
+        ) ?: emptyList()
+    }
+
+    @TypeConverter
+    fun toBuddiesLevelItemJson(meanings: List<BuddiesLevelsItem>?): String {
+        return jsonParser.toJson(
+            meanings,
+            object : TypeToken<ArrayList<BuddiesLevelsItem>>(){}.type
         ) ?: "[]"
     }
 

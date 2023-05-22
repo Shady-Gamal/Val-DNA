@@ -2,13 +2,10 @@ package com.example.data.repositoriesContracts.bundles
 
 import com.example.data.database.ValorantDatabase
 import com.example.data.model.toBundleItemDTO
-import com.example.data.model.toMapItemDTO
 import com.example.data.repositoriesContracts.WebServices
 import com.example.domain.entities.BundleItemDTO
-import com.example.domain.entities.MapItemDTO
 import com.example.domain.entities.Resource
 import com.example.domain.repository.BundlesOnlineDataSource
-import com.example.domain.repository.MapsOnlineDataSource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
@@ -21,7 +18,7 @@ val valorantDatabase: ValorantDatabase) :
     override suspend fun getBundles(): Flow<Resource<List<BundleItemDTO>>> {
         val response = webServices.getBundles()
 
-        response.data?.let { valorantDatabase.getBundlesDAO().saveBundles(it) }
+        response.data?.let { valorantDatabase.getBundlesDao().saveBundles(it) }
 
 
         return flow<Resource<List<BundleItemDTO>>>{

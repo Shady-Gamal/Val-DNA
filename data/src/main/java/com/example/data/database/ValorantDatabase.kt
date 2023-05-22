@@ -3,22 +3,21 @@ package com.example.data.database
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.example.data.database.DataBaseDAO.AgentsDao
-import com.example.data.database.DataBaseDAO.BundlesDao
-import com.example.data.database.DataBaseDAO.WeaponsDao
-import com.example.data.model.AgentsDataItem
-import com.example.data.model.BundlesDataItem
-import com.example.data.model.WeaponsDataItem
+import com.example.data.database.DataBaseDAO.*
+import com.example.data.model.*
 
-@Database(entities = [AgentsDataItem::class, WeaponsDataItem::class, BundlesDataItem::class],
- version = 3)
+@Database(entities = [AgentsDataItem::class, WeaponsDataItem::class, BundlesDataItem::class,
+ BuddiesDataItem::class, PlayerCardsDataItem::class],
+ version = 5)
 @TypeConverters(Converters::class)
 abstract class ValorantDatabase : RoomDatabase() {
 
  abstract fun getAgentsDao() : AgentsDao
 
- abstract fun getWeaponsDAO() : WeaponsDao
+ abstract fun getWeaponsDao() : WeaponsDao
 
- abstract fun getBundlesDAO() : BundlesDao
+ abstract fun getBundlesDao() : BundlesDao
+ abstract fun getBuddiesDao() : BuddiesDao
 
+ abstract fun getPlayerCardsDao() : PlayerCardsDao
 }

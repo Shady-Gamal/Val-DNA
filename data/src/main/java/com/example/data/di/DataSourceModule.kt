@@ -1,7 +1,12 @@
 package com.example.data.di
 
+import com.example.data.repositoriesContracts.PlayerCards.PlayerCardsOfflineDataSourceImpl
+import com.example.data.repositoriesContracts.PlayerCards.PlayerCardsOnlineDataSourceImpl
+import com.example.data.repositoriesContracts.Sprays.SpraysOnlineDataSourceImpl
 import com.example.data.repositoriesContracts.agents.AgentsOfflineDataSourceImpl
 import com.example.data.repositoriesContracts.agents.AgentsOnlineDataSourceImpl
+import com.example.data.repositoriesContracts.buddies.BuddiesOfflineDataSourceImpl
+import com.example.data.repositoriesContracts.buddies.BuddiesOnlineDataSourceImpl
 import com.example.data.repositoriesContracts.bundles.BundlesOfflineDataSourceImpl
 import com.example.data.repositoriesContracts.bundles.BundlesOnlineDataSourceImpl
 import com.example.data.repositoriesContracts.maps.MapsOnlineDataSourceImpl
@@ -45,4 +50,23 @@ abstract class DataSourceModule {
     @Binds
     @Singleton
     abstract fun bindBundlesOfflineDataSource(bundlesOfflineDataSourceImpl: BundlesOfflineDataSourceImpl) : BundlesOfflineDataSource
+
+    @Binds
+    @Singleton
+    abstract fun bindBuddiesOnlineDataSource(buddiesOnlineDataSourceImpl: BuddiesOnlineDataSourceImpl) : BuddiesOnlineDataSource
+
+    @Binds
+    @Singleton
+    abstract fun bindBuddiesOfflineDataSource(buddiesOfflineDataSourceImpl: BuddiesOfflineDataSourceImpl) : BuddiesOfflineDataSource
+    @Binds
+    @Singleton
+    abstract fun bindPlayerCardsOnlineDatsSource(playerCardsOnlineDataSourceImpl: PlayerCardsOnlineDataSourceImpl) : PlayerCardsOnlineDataSource
+
+    @Binds
+    @Singleton
+    abstract fun bindPlayerCardsOfflineDataSource(playerCardsOfflineDataSourceImpl: PlayerCardsOfflineDataSourceImpl) : PlayerCardsOfflineDataSource
+
+    @Binds
+    @Singleton
+    abstract fun bindSpraysOnlineDataSource(spraysOnlineDataSourceImpl : SpraysOnlineDataSourceImpl) : SpraysOnlineDataSource
 }

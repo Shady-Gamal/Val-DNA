@@ -15,7 +15,7 @@ class WeaponsOfflineDataSourceImpl @Inject constructor(val valorantDatabase: Val
 ) : WeaponsOfflineDataSource {
     override suspend fun getWeapons(): Flow<Resource<List<WeaponItemDTO>>> {
 
-        val resource = valorantDatabase.getWeaponsDAO().getWeapons()
+        val resource = valorantDatabase.getWeaponsDao().getWeapons()
 
         return flow<Resource<List<WeaponItemDTO>>> {
 

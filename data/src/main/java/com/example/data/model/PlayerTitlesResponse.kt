@@ -1,6 +1,6 @@
 package com.example.data.model
 
-import com.example.domain.entities.PlayerTitleDTO
+import com.example.domain.entities.PlayerTitleIemDTO
 import com.google.gson.annotations.SerializedName
 
 data class PlayerTitlesResponse(
@@ -30,9 +30,9 @@ data class PlayerTitlesDataItem(
 	val isHiddenIfNotOwned: Boolean? = null
 )
 
-fun PlayerTitlesDataItem.toPlayerTitleDTO() : PlayerTitleDTO{
+fun PlayerTitlesDataItem.toPlayerTitleDTO() : PlayerTitleIemDTO{
 
-	return PlayerTitleDTO(
+	return PlayerTitleIemDTO(
 		displayName = displayName,
 	)
 }

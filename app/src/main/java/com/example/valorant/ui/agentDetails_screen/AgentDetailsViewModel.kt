@@ -18,7 +18,7 @@ class AgentDetailsViewModel @Inject constructor(
     private val getSelectedAgentUseCase: GetSelectedAgentUseCase
 ) : ViewModel() {
 
-    var selectedAgentState by mutableStateOf(SelectedAgentState())
+    var agentDetailsState by mutableStateOf(AgentDetailsState())
 
     init {
        savedStateHandle.get<String>("agentId")?.let {  agentId ->
@@ -31,13 +31,13 @@ class AgentDetailsViewModel @Inject constructor(
             getSelectedAgentUseCase.invoke(uuid).collect{
 
                 when (it){
-                    is Resource.Success -> selectedAgentState = selectedAgentState.copy(
+                    is Resource.Success -> agentDetailsState = agentDetailsState.copy(
                         selectedAgentDetails = it.data
                 )
-                    is Resource.Loading -> selectedAgentState = selectedAgentState.copy(
+                    is Resource.Loading -> agentDetailsState = agentDetailsState.copy(
                         isLoading = true
                     )
-                    is Resource.Error -> selectedAgentState = selectedAgentState.copy(
+                    is Resource.Error -> agentDetailsState = agentDetailsState.copy(
                         error = it.message
                     )
 

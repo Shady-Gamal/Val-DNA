@@ -1,22 +1,19 @@
 package com.example.data.database.DataBaseDAO
 
-import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.data.model.BundlesDataItem
+import com.example.data.model.PlayerCardsDataItem
 
 @Dao
-interface BundlesDao {
+interface PlayerCardsDao {
 
-    @Query("SELECT * FROM BundlesDataItem")
-   suspend fun getBundles(): List<BundlesDataItem>
+    @Query("SELECT * FROM PlayerCardsDataItem")
+    suspend fun getPlayerCards() : List<PlayerCardsDataItem>
 
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun saveBundles(bundles: List<BundlesDataItem>)
-
-
-
+    suspend fun savePlayerCards(playerCardItem: List<PlayerCardsDataItem>)
 }

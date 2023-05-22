@@ -11,8 +11,7 @@ fun WeaponsScreen(
     viewModel: WeaponsViewModel = hiltViewModel()
 ) {
 
- val weaponState = viewModel.weaponState
-    
+    val weaponState = viewModel.weaponState
     WeaponsLazyGrid(weaponState = weaponState)
 
 

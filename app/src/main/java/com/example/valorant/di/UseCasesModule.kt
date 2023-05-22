@@ -1,9 +1,6 @@
 package com.example.valorant.di
 
-import com.example.domain.repository.AgentsRepository
-import com.example.domain.repository.BundlesRepository
-import com.example.domain.repository.MapsRepository
-import com.example.domain.repository.WeaponsRepository
+import com.example.domain.repository.*
 import com.example.domain.usecases.*
 import dagger.Module
 import dagger.Provides
@@ -49,5 +46,24 @@ object UseCasesModule {
     fun provideBundlesUseCase(bundlesRepository: BundlesRepository) : GetBundlesUseCase{
 
         return GetBundlesUseCase(bundlesRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideBuddiesUseCase(buddiesRepository: BuddiesRepository) : GetBuddiesUseCase{
+
+        return GetBuddiesUseCase(buddiesRepository)
+    }
+    @Singleton
+    @Provides
+    fun providePlayerCardsUseCase(playerCardsRepository: PlayerCardsRepository) : GetPlayerCardsUseCase{
+        return GetPlayerCardsUseCase((playerCardsRepository))
+    }
+
+    @Singleton
+    @Provides
+    fun provideSpraysUseCase(spraysRepository: SpraysRepository) : GetSpraysUSeCase{
+
+        return GetSpraysUSeCase(spraysRepository)
     }
 }
