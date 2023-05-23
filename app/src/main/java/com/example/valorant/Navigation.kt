@@ -11,13 +11,16 @@ import com.example.valorant.ui.agents_screen.AgentsScreen
 import com.example.valorant.ui.buddies_screen.BuddiesScreen
 import com.example.valorant.ui.bundles_screen.BundlesScreen
 import com.example.valorant.ui.home_screen.HomeScreen
+import com.example.valorant.ui.maps_screen.MapsScreen
 import com.example.valorant.ui.playerCards_screen.PlayerCardsScreen
 import com.example.valorant.ui.sprays_screen.SpraysScreen
+import com.example.valorant.ui.weaponDetails_screen.WeaponDetailsScreen
 import com.example.valorant.ui.weapons_Screen.WeaponsScreen
 
 
 @Composable
 fun Navigation(navController: NavHostController) {
+
     NavHost(navController = navController, startDestination = Screen.HomeScreen.route ){
         composable(route = Screen.HomeScreen.route){
 
@@ -55,6 +58,20 @@ fun Navigation(navController: NavHostController) {
         composable(route = Screen.BuddiesScreen.route){
 
             BuddiesScreen(navController = navController)
+        }
+        composable(route = Screen.MapsScreen.route){
+
+            MapsScreen(navController = navController)
+        }
+        composable(route = Screen.WeaponDetailsScreen.route + "/{weaponId}", arguments =
+        listOf(
+            navArgument("weaponId"){
+                type = NavType.StringType
+            }
+        )
+        ){
+            
+            WeaponDetailsScreen(navController = navController)
         }
 
 

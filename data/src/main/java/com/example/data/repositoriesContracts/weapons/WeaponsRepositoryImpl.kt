@@ -24,4 +24,8 @@ val context: Context) : WeaponsRepository {
 
         }
     }
+
+    override suspend fun getWeaponsByUUID(uuid : String): Flow<Resource<WeaponItemDTO>> {
+        return weaponsOfflineDataSource.getWeaponsByUUID(uuid)
+    }
 }

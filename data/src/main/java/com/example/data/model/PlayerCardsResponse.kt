@@ -47,6 +47,7 @@ data class PlayerCardsDataItem(
 
 fun PlayerCardsDataItem.toPlayerCardItemDTO() : PlayerCardItemDTO{
 	return PlayerCardItemDTO(
-		displayIcon = displayIcon
+		displayIcon = displayIcon,
+		largeArt = largeArt
 	)
 }

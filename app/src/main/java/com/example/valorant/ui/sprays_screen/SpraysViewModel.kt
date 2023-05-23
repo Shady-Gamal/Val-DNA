@@ -1,5 +1,6 @@
 package com.example.valorant.ui.sprays_screen
 
+import android.content.Context
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -14,7 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SpraysViewModel @Inject constructor(
-    val getSpraysUSeCase: GetSpraysUSeCase
+    val getSpraysUSeCase: GetSpraysUSeCase,
 ) : ViewModel() {
 
     init {

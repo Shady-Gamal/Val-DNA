@@ -3,7 +3,8 @@ package com.example.data.model
 import androidx.room.DatabaseView
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.domain.entities.WeaponItemDTO
+import com.example.data.util.toDomainobject
+import com.example.domain.entities.*
 import com.google.gson.annotations.SerializedName
 
 data class WeaponsResponse(
@@ -27,7 +28,7 @@ data class AirBurstStats(
 data class WeaponsDataItem(
 
 	@field:SerializedName("skins")
-	val skins: List<SkinsItem?>? = null,
+	val skins: List<WeaponsSkinsItem?>? = null,
 
 	@field:SerializedName("displayIcon")
 	val displayIcon: String? = null,
@@ -154,7 +155,7 @@ data class ShopData(
 	val categoryText: String? = null
 )
 
-data class ChromasItem(
+data class WeaponsChromasItem(
 
 	@field:SerializedName("displayIcon")
 	val displayIcon: Any? = null,
@@ -187,7 +188,7 @@ data class GridPosition(
 	val row: Int? = null
 )
 
-data class SkinsItem(
+data class WeaponsSkinsItem(
 
 	@field:SerializedName("displayIcon")
 	val displayIcon: String? = null,
@@ -205,7 +206,7 @@ data class SkinsItem(
 	val assetPath: String? = null,
 
 	@field:SerializedName("chromas")
-	val chromas: List<ChromasItem?>? = null,
+	val chromas: List<WeaponsChromasItem?>? = null,
 
 	@field:SerializedName("uuid")
 	val uuid: String? = null,
@@ -214,7 +215,7 @@ data class SkinsItem(
 	val themeUuid: String? = null,
 
 	@field:SerializedName("levels")
-	val levels: List<LevelsItem?>? = null
+	val levels: List<WeaponsLevelsItem?>? = null
 )
 
 data class AdsStats(
@@ -235,7 +236,7 @@ data class AdsStats(
 	val firstBulletAccuracy: Any? = null
 )
 
-data class LevelsItem(
+data class WeaponsLevelsItem(
 
 	@field:SerializedName("displayIcon")
 	val displayIcon: String? = null,
@@ -268,8 +269,38 @@ data class AltShotgunStats(
 fun WeaponsDataItem.toWeaponItemDTO() : WeaponItemDTO {
 
 	return WeaponItemDTO(
+		uuid= uuid,
 		displayIcon = displayIcon,
-		displayName = displayName
-		)
+		displayName = displayName,
+		skins = skins?.map {
+			it?.toWeaponsSkinsItemDTO()
+		}
+	, weaponStats = weaponStats?.toDomainobject(WeaponStatsDTO::class.java)
+	, shopData = shopData?.toDomainobject(ShopDataDTO::class.java)
+	)
+
+}
+
+fun WeaponsSkinsItem.toWeaponsSkinsItemDTO() : WeaponSkinsItemDTO{
+
+	return WeaponSkinsItemDTO(
+		displayIcon = displayIcon,
+		contentTierUuid = contentTierUuid,
+		wallpaper = wallpaper,
+		displayName = displayName,
+		assetPath =assetPath,
+		levels = levels?.map {
+			it?.toWeaponsLevelItem()
+		},
+	)
+}
+
+fun WeaponsLevelsItem.toWeaponsLevelItem() : WeaponsLevelsItemDTO {
+
+	return WeaponsLevelsItemDTO(displayIcon = displayIcon,
+		displayName = displayName,
+	uuid = uuid,
+	assetPath = assetPath, levelItem = levelItem,
+	streamedVideo = streamedVideo)
 
 }

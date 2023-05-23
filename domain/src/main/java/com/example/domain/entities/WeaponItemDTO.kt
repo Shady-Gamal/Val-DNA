@@ -2,7 +2,7 @@ package com.example.domain.entities
 
 data class WeaponItemDTO(
 
-    val skins: List<SkinsItemDTO?>? = null,
+    val skins: List<WeaponSkinsItemDTO?>? = null,
 
     val displayIcon: String? = null,
 
@@ -155,7 +155,7 @@ data class GridPositionDTO(
     val row: Int? = null
 )
 
-data class SkinsItemDTO(
+data class WeaponSkinsItemDTO(
 
 
     val displayIcon: String? = null,
@@ -182,7 +182,7 @@ data class SkinsItemDTO(
     val themeUuid: String? = null,
 
 
-    val levels: List<LevelsItemDTO?>? = null
+    val levels: List<WeaponsLevelsItemDTO?>? = null
 )
 
 data class AdsStatsDTO(
@@ -203,7 +203,7 @@ data class AdsStatsDTO(
     val firstBulletAccuracy: Any? = null
 )
 
-data class LevelsItemDTO(
+data class WeaponsLevelsItemDTO(
 
 
     val displayIcon: String? = null,

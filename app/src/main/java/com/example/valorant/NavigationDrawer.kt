@@ -47,8 +47,8 @@ fun drawerBody(
                 .clickable {
                     onItemClick(item)
                 }){
-                Icon(painter = painterResource(id =item.icon), contentDescription = null,
-                    tint = Color.White,
+                Icon(painter = painterResource(id =item.icon ), contentDescription = null,
+                    tint = Color.White
                     )
                 Spacer(modifier.width(10.dp))
            Text(text = item.title,

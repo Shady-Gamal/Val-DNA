@@ -78,7 +78,10 @@ fun MapsDataItem.toMapItemDTO() : MapItemDTO{
 
 	return MapItemDTO(
 		splash = splash,
-		displayName = displayName
+		displayName = displayName,
+		mapUrl = mapUrl,
+		coordinates = coordinates,
+		displayIcon = displayIcon
 	)
 
 }

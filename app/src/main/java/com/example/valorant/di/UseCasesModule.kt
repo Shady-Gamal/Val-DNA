@@ -66,4 +66,11 @@ object UseCasesModule {
 
         return GetSpraysUSeCase(spraysRepository)
     }
+
+    @Singleton
+    @Provides
+    fun provideSelectedWeaponUseCase(weaponsRepository: WeaponsRepository) : GetSelectedWeaponUseCase{
+
+        return GetSelectedWeaponUseCase(weaponsRepository)
+    }
 }

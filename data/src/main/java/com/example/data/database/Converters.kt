@@ -74,18 +74,18 @@ class Converters(val jsonParser: JsonParser) {
     }
 
     @TypeConverter
-    fun fromSkinsItemJson(json: String): List<SkinsItem> {
-        return jsonParser.fromJson<ArrayList<SkinsItem>>(
+    fun fromSkinsItemJson(json: String): List<WeaponsSkinsItem> {
+        return jsonParser.fromJson<ArrayList<WeaponsSkinsItem>>(
             json,
-            object : TypeToken<ArrayList<SkinsItem>>(){}.type
+            object : TypeToken<ArrayList<WeaponsSkinsItem>>(){}.type
         ) ?: emptyList()
     }
 
     @TypeConverter
-    fun toSkinsItemJson(meanings: List<SkinsItem>?): String {
+    fun toSkinsItemJson(meanings: List<WeaponsSkinsItem>?): String {
         return jsonParser.toJson(
             meanings,
-            object : TypeToken<ArrayList<SkinsItem>>(){}.type
+            object : TypeToken<ArrayList<WeaponsSkinsItem>>(){}.type
         ) ?: "[]"
     }
 

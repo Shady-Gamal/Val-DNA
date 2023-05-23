@@ -6,6 +6,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
@@ -15,12 +16,16 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.Role.Companion.Button
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import coil.compose.SubcomposeAsyncImage
 import com.example.data.util.toDomainobject
+import com.example.valorant.R
 import com.example.valorant.ui.agentDetails_screen.AgentDetailsState
 import com.example.valorant.ui.theme.RedPrimary
 
@@ -62,23 +67,26 @@ fun AgentAbitliteis(agentDetailsState: AgentDetailsState) {
 
             ) {
 
-
                 Row(
                     horizontalArrangement = Arrangement.Center,
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier.fillMaxWidth()
+
+                    ,
                 ) {
-                    agentDetailsState.selectedAgentDetails?.abilities?.forEachIndexed { index, it ->
-                        Row(
-                            modifier = Modifier
-                                .padding(
-                                    all = 8.dp,
-                                )
-                                .weight(1f),
-                        ) {
-                            AsyncImage(
-                                model = it?.displayIcon,
+                    agentDetailsState.selectedAgentDetails?.abilities?.forEachIndexed { index, item ->
+
+
+                            SubcomposeAsyncImage(
+                                model = item?.displayIcon , loading = {
+                                  CircularProgressIndicator()
+                                }, error = {
+                                       Image(painter = painterResource(id = R.drawable.agents), contentDescription =null,
+                                       modifier = Modifier.height(35.dp))
+                                },
                                 contentDescription = null,
+
                                 modifier = Modifier
+                                    .padding(all = 8.dp)
                                     .clip(
                                         shape = RoundedCornerShape(
                                             size = 12.dp,
@@ -97,9 +105,10 @@ fun AgentAbitliteis(agentDetailsState: AgentDetailsState) {
                                     .padding(
                                         vertical = 12.dp,
                                         horizontal = 16.dp,
-                                    ),
+                                    )
+                                    .weight(1f),
                             )
-                        }
+
                     }
                 }
                 Column(modifier = Modifier

@@ -8,6 +8,8 @@ import kotlinx.coroutines.flow.Flow
 interface WeaponsRepository {
 
     suspend fun getWeapons() : Flow<Resource<List<WeaponItemDTO>>>
+    suspend fun getWeaponsByUUID(uuid: String) : Flow<Resource<WeaponItemDTO>>
+
 
 }
 interface WeaponsOnlineDataSource{
@@ -19,6 +21,7 @@ interface WeaponsOnlineDataSource{
 interface WeaponsOfflineDataSource{
 
     suspend fun getWeapons() : Flow<Resource<List<WeaponItemDTO>>>
+    suspend fun getWeaponsByUUID(uuid : String) : Flow<Resource<WeaponItemDTO>>
 
 
 }

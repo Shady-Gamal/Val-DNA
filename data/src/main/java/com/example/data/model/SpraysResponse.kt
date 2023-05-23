@@ -69,6 +69,9 @@ data class SpraysLevelsItem(
 fun SpraysDataItem.toSprayItemDTO() : SprayItemDTO{
 
 	return SprayItemDTO(
-		displayIcon = displayIcon
+		displayIcon = displayIcon,
+		fullIcon = fullIcon,
+		animationGif = animationGif,
+		fullTransparentIcon = fullTransparentIcon
 	)
 }

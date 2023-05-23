@@ -6,6 +6,10 @@ import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
+import com.example.valorant.ui.sprays_screen.components.SpraysLazyGrid
+import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.currentCoroutineContext
+import javax.inject.Inject
 
 @Composable
 fun SpraysScreen(
@@ -15,11 +19,7 @@ fun SpraysScreen(
 
     val spraysState = viewModel.spraysState
 
-    LazyRow(content = {
-        items(spraysState.spraysInfo?.size ?: 0){
+SpraysLazyGrid(spraysState = spraysState)
 
-            AsyncImage(model = spraysState.spraysInfo?.get(it)?.displayIcon, contentDescription = null )
-        }
-    })
+    }
 
-}

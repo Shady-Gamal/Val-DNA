@@ -29,6 +29,7 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
                 val drawerState = rememberDrawerState(DrawerValue.Closed)
                 val scope = rememberCoroutineScope()
+
                 ModalNavigationDrawer(
                     drawerState = drawerState,
                     drawerContent ={

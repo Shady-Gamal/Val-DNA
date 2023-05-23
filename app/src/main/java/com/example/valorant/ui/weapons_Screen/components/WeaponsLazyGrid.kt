@@ -1,6 +1,7 @@
 package com.example.valorant.ui.weapons_Screen.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -11,12 +12,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.example.domain.entities.AgentItemDTO
+import com.example.domain.entities.WeaponItemDTO
 import com.example.valorant.ui.theme.PinkForLazyRows
 import com.example.valorant.ui.weapons_Screen.WeaponState
 
 @Composable
 fun WeaponsLazyGrid(
-    weaponState : WeaponState
+    weaponState : WeaponState,
+    onItemClick: (WeaponItemDTO) -> Unit
 ) {
     LazyVerticalGrid(columns = GridCells.Fixed(2), content = {
 
@@ -26,6 +30,9 @@ fun WeaponsLazyGrid(
                 .width(200.dp)
                 .height(120.dp)
                 .padding(end = 10.dp)
+                .clickable {
+                    onItemClick(weaponState.weaponsInfo?.get(it)!!)
+                }
             ) {
                 Box(
                     modifier = Modifier
