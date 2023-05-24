@@ -13,6 +13,8 @@ import com.example.valorant.ui.theme.BackGround
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
+
+
 fun AppBar(
     onNavigationIconClick: ()-> Unit
 ) {

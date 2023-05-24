@@ -4,6 +4,9 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
@@ -26,6 +29,7 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     val viewModel : MainViewModel by viewModels()
+    @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 installSplashScreen().apply {
@@ -41,19 +45,27 @@ installSplashScreen().apply {
                 val scope = rememberCoroutineScope()
 
 
-                var showBottomBar by rememberSaveable {
-                    mutableStateOf(true)
-                }
+
 
 
                 val navBackStackEntry by navController.currentBackStackEntryAsState()
 
+                val topBarState = rememberSaveable { (mutableStateOf(true)) }
 
-                showBottomBar = when (navBackStackEntry?.destination?.route) {
-                    Screen.WeaponDetailsScreen.route + "/{weaponId}" -> false
-                    Screen.AgentDetailsScreen.route + "/{agentId}" -> false
-                    else -> true
+                when (navBackStackEntry?.destination?.route) {
+
+
+                    Screen.WeaponDetailsScreen.route + "/{weaponId}" -> {
+
+                        topBarState.value = false
+                    }
+
+                    Screen.AgentDetailsScreen.route + "/{agentId}" -> {
+                        topBarState.value = false
+                    }
+                    else -> topBarState.value = true
                 }
+
 
 
                 ModalNavigationDrawer(
@@ -79,14 +91,24 @@ installSplashScreen().apply {
                 }, content = {
                         Scaffold(
                             topBar = {
+                                AnimatedVisibility(
+                                    visible = topBarState.value,
+                                    enter = slideInVertically(initialOffsetY = { -it }),
+                                    exit = slideOutVertically(targetOffsetY = { -it }),
+                                    content = {
+                                        AppBar(onNavigationIconClick = {
+                                            scope.launch { drawerState.apply { if (drawerState.isClosed) open() else close() } }
 
-                                if (showBottomBar) {AppBar(onNavigationIconClick = {
-                                    scope.launch { drawerState.apply { if (drawerState.isClosed) open() else close() } }
+                                        })
+                                    }
+                                )
 
-                            }) }
+
                         }, content = {
                             Box(modifier = Modifier
-                                .padding(it)
+                                .padding(
+                                    if (topBarState.value) it else {PaddingValues(0.dp)}
+                                )
                                 .background(BackGround)){
                             Navigation(navController = navController)
 
@@ -99,8 +121,20 @@ installSplashScreen().apply {
                 )
 
 
+                @OptIn(ExperimentalMaterial3Api::class)
+                @Composable
+                fun topassbar() {
+
+                }
+
+
             }
         }
     }
+
+
+
+
+
 }
 
