@@ -1,12 +1,13 @@
 package com.example.valorant
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.paint
@@ -14,7 +15,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.valorant.ui.theme.BackGround
 import com.example.valorant.ui.theme.ValorantTheme
@@ -23,13 +25,35 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+    val viewModel : MainViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+installSplashScreen().apply {
+    this.setKeepOnScreenCondition{
+        viewModel.isLoading.value
+    }
+}
+
         setContent {
             ValorantTheme {
                 val navController = rememberNavController()
                 val drawerState = rememberDrawerState(DrawerValue.Closed)
                 val scope = rememberCoroutineScope()
+
+
+                var showBottomBar by rememberSaveable {
+                    mutableStateOf(true)
+                }
+
+
+                val navBackStackEntry by navController.currentBackStackEntryAsState()
+
+
+                showBottomBar = when (navBackStackEntry?.destination?.route) {
+                    Screen.WeaponDetailsScreen.route + "/{weaponId}" -> false
+                    Screen.AgentDetailsScreen.route + "/{agentId}" -> false
+                    else -> true
+                }
 
 
                 ModalNavigationDrawer(
@@ -46,19 +70,24 @@ class MainActivity : ComponentActivity() {
                             drawerBody(items =
                        navigationList,
                                 onItemClick = {navController.navigate(route = it.id){
-                                    popUpTo(navController.graph.findStartDestination().id)
+                                    popUpTo(Screen.HomeScreen.route)
                                     launchSingleTop = true
                                 }
                                 scope.launch { drawerState.close() }
                                 }
                             )}
                 }, content = {
-                        Scaffold(topBar = {
-                            AppBar(onNavigationIconClick = {
-                                scope.launch { drawerState.apply { if (drawerState.isClosed) open() else close() } }
-                            })
+                        Scaffold(
+                            topBar = {
+                                Log.e("agt",showBottomBar.toString())
+                                if (showBottomBar) {AppBar(onNavigationIconClick = {
+                                    scope.launch { drawerState.apply { if (drawerState.isClosed) open() else close() } }
+
+                            }) }
                         }, content = {
-                            Box(modifier = Modifier.padding(it).background(BackGround)){
+                            Box(modifier = Modifier
+                                .padding(it)
+                                .background(BackGround)){
                             Navigation(navController = navController)
 
                             }

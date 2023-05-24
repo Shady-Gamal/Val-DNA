@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.APP.Starting" parent="Theme.SplashScreen">
+
+
+        <item name="windowSplashScreenBackground">#EC4949</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/logo</item>
+        <item name="postSplashScreenTheme">@style/Theme.Valorant</item>
+    </style>
+</resources>

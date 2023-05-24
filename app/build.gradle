@@ -89,4 +89,11 @@ dependencies {
     implementation("io.coil-kt:coil-compose:2.3.0")
     implementation "io.coil-kt:coil-gif:2.1.0"
 
+    //savable
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.1")
+
+    //SplashScreenAPI
+    implementation("androidx.core:core-splashscreen:1.0.1")
+
+
 }

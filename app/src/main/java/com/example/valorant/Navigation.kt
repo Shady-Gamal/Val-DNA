@@ -13,7 +13,6 @@ import com.example.valorant.ui.bundles_screen.BundlesScreen
 import com.example.valorant.ui.home_screen.HomeScreen
 import com.example.valorant.ui.maps_screen.MapsScreen
 import com.example.valorant.ui.playerCards_screen.PlayerCardsScreen
-import com.example.valorant.ui.splash_screen.SplashScreen
 import com.example.valorant.ui.sprays_screen.SpraysScreen
 import com.example.valorant.ui.weaponDetails_screen.WeaponDetailsScreen
 import com.example.valorant.ui.weapons_Screen.WeaponsScreen
@@ -22,10 +21,8 @@ import com.example.valorant.ui.weapons_Screen.WeaponsScreen
 @Composable
 fun Navigation(navController: NavHostController) {
 
-    NavHost(navController = navController, startDestination = Screen.SplashScreen.route ){
-        composable(route = Screen.SplashScreen.route){
-            SplashScreen(navController = navController)
-        }
+    NavHost(navController = navController, startDestination = Screen.HomeScreen.route ){
+
         composable(route = Screen.HomeScreen.route){
 
             HomeScreen(navController = navController)
