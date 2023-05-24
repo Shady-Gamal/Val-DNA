@@ -79,7 +79,7 @@ installSplashScreen().apply {
                 }, content = {
                         Scaffold(
                             topBar = {
-                                Log.e("agt",showBottomBar.toString())
+
                                 if (showBottomBar) {AppBar(onNavigationIconClick = {
                                     scope.launch { drawerState.apply { if (drawerState.isClosed) open() else close() } }
 
