@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.valorant.ui.theme.BackGround
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -17,7 +18,7 @@ fun AppBar(
 ) {
 
    TopAppBar(
-       title = { null
+       title = {
                },
        navigationIcon = {
            IconButton(onClick = onNavigationIconClick) {
@@ -25,7 +26,7 @@ fun AppBar(
               tint = Color.Red)
 
            }
-       }
+       }, colors = TopAppBarDefaults.topAppBarColors(containerColor = BackGround)
 
    )
 

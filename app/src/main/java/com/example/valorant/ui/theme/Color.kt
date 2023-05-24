@@ -9,6 +9,7 @@ val RedPrimary = Color(0xFFEC4949)
 val WhiteForTitleText = Color (0xFFF4F4F4)
 val WhiteForBodyText = Color (0xFFF4CDCD)
 val PinkForLazyRows = Color (0xffFDE5E5)
+val BackGround = Color (0xffFEF1F1)
 
 
 val Purple40 = Color(0xFF6650a4)

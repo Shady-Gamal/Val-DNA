@@ -15,6 +15,7 @@ object AgentScreen : Screen("agents_screen")
     object MapsScreen : Screen("maps_screen")
 
     object WeaponDetailsScreen : Screen ("weaponDetails_screen")
+    object SplashScreen : Screen ("Splash_screen")
 
 
 

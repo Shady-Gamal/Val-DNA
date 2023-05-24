@@ -138,5 +138,37 @@ class Converters(val jsonParser: JsonParser) {
         ) ?: "[]"
     }
 
+    @TypeConverter
+    fun fromCalloutsItemJson(json: String): List<CalloutsItem> {
+        return jsonParser.fromJson<ArrayList<CalloutsItem>>(
+            json,
+            object : TypeToken<ArrayList<CalloutsItem>>(){}.type
+        ) ?: emptyList()
+    }
+
+    @TypeConverter
+    fun toCalloutsItemJson(meanings: List<CalloutsItem>?): String {
+        return jsonParser.toJson(
+            meanings,
+            object : TypeToken<ArrayList<CalloutsItem>>(){}.type
+        ) ?: "[]"
+    }
+
+    @TypeConverter
+    fun fromSpraysLevelItemJson(json: String): List<SpraysLevelsItem> {
+        return jsonParser.fromJson<ArrayList<SpraysLevelsItem>>(
+            json,
+            object : TypeToken<ArrayList<SpraysLevelsItem>>(){}.type
+        ) ?: emptyList()
+    }
+
+    @TypeConverter
+    fun toCSpraysLevelItemJson(meanings: List<SpraysLevelsItem>?): String {
+        return jsonParser.toJson(
+            meanings,
+            object : TypeToken<ArrayList<SpraysLevelsItem>>(){}.type
+        ) ?: "[]"
+    }
+
 
 }

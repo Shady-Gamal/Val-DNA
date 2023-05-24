@@ -12,6 +12,8 @@ import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import coil.compose.AsyncImagePainter
 import coil.compose.SubcomposeAsyncImage
+import com.example.valorant.ui.buddies_screen.components.BuddiesLazyGrid
+import com.example.valorant.ui.sprays_screen.components.SpraysLazyGrid
 
 @Composable
 fun BuddiesScreen(
@@ -19,22 +21,6 @@ fun BuddiesScreen(
     viewModel: BuddiesViewModel = hiltViewModel(),
 ) {
     val buddiesState = viewModel.buddiesState
-        LazyVerticalGrid(columns = GridCells.Adaptive(100.dp), content ={
-            items(
-                buddiesState.buddiesInfo?.size ?: 0
-            ){
-
-                SubcomposeAsyncImage(
-                    model = buddiesState.buddiesInfo?.get(it)?.displayIcon,
-                    loading = {
-                        CircularProgressIndicator()
-                    },
-                    contentDescription = null
-                )
-
-
-
-            }
-        } )
+        BuddiesLazyGrid(buddiesState = buddiesState)
 
 }

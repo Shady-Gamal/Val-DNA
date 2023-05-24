@@ -5,6 +5,7 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
@@ -38,9 +39,10 @@ import kotlinx.coroutines.yield
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun ViewPager(
+fun AgentsViewPager(
     modifier: Modifier = Modifier,
     state: HomeState,
+    onItemClick : () -> Unit
 ){
 
 
@@ -49,7 +51,10 @@ fun ViewPager(
 
     ) {
         if (!(state.agentsInfo.isNullOrEmpty())){
-        Box(modifier = Modifier.background(color = RedPrimary)) {
+        Box(modifier = Modifier.background(color = RedPrimary)
+            .clickable {
+                onItemClick()
+            }) {
             val pageCount = 3
             val pagerState = rememberPagerState(
                 initialPage = 0,
@@ -74,6 +79,7 @@ fun ViewPager(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(185.dp)
+
             ) { page ->
                 Row() {
                     Column(

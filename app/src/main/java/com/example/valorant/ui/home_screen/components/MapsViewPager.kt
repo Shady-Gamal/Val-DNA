@@ -4,6 +4,7 @@ package com.example.valorant.ui.home_screen.components
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
@@ -20,6 +21,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.*
 import androidx.compose.ui.graphics.R
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
@@ -33,11 +35,21 @@ import kotlinx.coroutines.yield
 fun MapsViewPager(
     modifier: Modifier = Modifier,
     state: HomeState,
+    onItemClick : () -> Unit
 ){
-    Card(shape = RoundedCornerShape(10.dp),
-        modifier = Modifier.padding(10.dp)
+Column(modifier = Modifier.padding(10.dp)) {
+
+    Text(text = "Maps", fontSize = 25.sp,
+        color = RedPrimary,
+        fontWeight = FontWeight.Bold
+        , modifier = Modifier.padding(bottom = 5.dp))
+
+    Card(
+        shape = RoundedCornerShape(10.dp),
     ) {
-        Box (modifier = Modifier.background(color = RedPrimary)) {
+        Box(modifier = Modifier.background(color = RedPrimary).clickable {
+            onItemClick()
+        }) {
             val pageCount = state.mapsInfo?.size ?: 1
             val pagerState = rememberPagerState(
                 initialPage = 0,
@@ -45,12 +57,12 @@ fun MapsViewPager(
             ) {
                 pageCount
             }
-            LaunchedEffect(Unit){
-                while (true){
+            LaunchedEffect(Unit) {
+                while (true) {
                     yield()
                     delay(2000)
                     pagerState.animateScrollToPage(
-                        page = (pagerState.currentPage + 1) % (pageCount ),
+                        page = (pagerState.currentPage + 1) % (pageCount),
                         animationSpec = tween(600)
                     )
                 }
@@ -63,19 +75,24 @@ fun MapsViewPager(
             ) { page ->
                 Box() {
 
-                    AsyncImage(model = state.mapsInfo?.get(page)?.splash, contentDescription = null
-                    , contentScale = ContentScale.Crop)
-                    Text(text = state.mapsInfo?.get(page)?.displayName ?: "Error"
-                    , fontSize = 50.sp,
-                        color = Color.White
+                    AsyncImage(
+                        model = state.mapsInfo?.get(page)?.splash,
+                        contentDescription = null,
+                        contentScale = ContentScale.Crop
+                    )
+                    Text(
+                        text = state.mapsInfo?.get(page)?.displayName ?: "Error", fontSize = 40.sp,
+                        color = Color.White, modifier= Modifier.padding(7.dp)
+                            .background(Color.Black.copy(.5f),
+                            shape = CircleShape
+                        ).padding(10.dp)
                     )
                 }
             }
             Row(
                 Modifier
                     .fillMaxWidth()
-                    .align(alignment = BottomCenter)
-                ,
+                    .align(alignment = BottomCenter),
                 verticalAlignment = Alignment.Bottom,
                 horizontalArrangement = Arrangement.Center
             ) {
@@ -93,6 +110,9 @@ fun MapsViewPager(
             }
         }
 
-    }}
+    }
+
+}
+}
 
 

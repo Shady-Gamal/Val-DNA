@@ -7,8 +7,8 @@ import com.example.data.database.DataBaseDAO.*
 import com.example.data.model.*
 
 @Database(entities = [AgentsDataItem::class, WeaponsDataItem::class, BundlesDataItem::class,
- BuddiesDataItem::class, PlayerCardsDataItem::class],
- version = 5)
+ BuddiesDataItem::class, PlayerCardsDataItem::class, MapsDataItem::class, SpraysDataItem::class],
+ version = 7)
 @TypeConverters(Converters::class)
 abstract class ValorantDatabase : RoomDatabase() {
 
@@ -20,4 +20,8 @@ abstract class ValorantDatabase : RoomDatabase() {
  abstract fun getBuddiesDao() : BuddiesDao
 
  abstract fun getPlayerCardsDao() : PlayerCardsDao
+
+ abstract fun getMapsDao() : MapsDao
+
+ abstract fun getSpraysDao() : SpraysDao
 }

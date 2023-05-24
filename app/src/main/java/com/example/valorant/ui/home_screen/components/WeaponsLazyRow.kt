@@ -18,12 +18,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.example.domain.entities.AgentItemDTO
+import com.example.domain.entities.WeaponItemDTO
 import com.example.valorant.ui.home_screen.HomeState
 import com.example.valorant.ui.theme.PinkForLazyRows
 import com.example.valorant.ui.theme.RedPrimary
 
 @Composable
-fun WeaponsLazyRow(state : HomeState) {
+fun WeaponsLazyRow(state : HomeState,
+onWeaponClick: (WeaponItemDTO) -> Unit,
+onSeeMoreClick : () -> Unit) {
 
     Column(modifier = Modifier.padding(10.dp)) {
 
@@ -38,33 +42,43 @@ fun WeaponsLazyRow(state : HomeState) {
                 .width(200.dp)
                 .height(120.dp)
                 .padding(end = 10.dp)
+
+
             ) {
                 Box(
                     modifier = Modifier
                         .background(color = PinkForLazyRows)
                         .fillMaxSize()
-                        .clickable {  }) {
+                        ) {
                     
                     if(it == 5 ){
 
-                        Text(text = "See More")
+                        Text(text = "See More", modifier = Modifier.clickable {
+                            onSeeMoreClick()
+                        })
                     }
                     else {
-                        Text(
-                            text = state.weaponsInfo?.get(it)?.displayName ?: "Unknown",
-                            modifier = Modifier
-                                .align(TopCenter)
-                                .padding(top = 5.dp)
-                        )
-                        Spacer(modifier = Modifier.height(10.dp))
+                        Box(modifier = Modifier.clickable
+                        {
+                            onWeaponClick(state.weaponsInfo?.get(it)!!)
+                        }.fillMaxSize()) {
+                            Text(
+                                text = state.weaponsInfo?.get(it)?.displayName ?: "Unknown",
+                                modifier = Modifier
+                                    .align(TopCenter)
+                                    .padding(top = 5.dp)
+                            )
+                            Spacer(modifier = Modifier.height(10.dp))
 
-                        AsyncImage(
-                            model = state.weaponsInfo?.get(it)?.displayIcon,
-                            contentDescription = null,
-                            modifier = Modifier
-                                .align(Center)
-                                .sizeIn(maxWidth = 180.dp, maxHeight = 70.dp)
-                        )
+                            AsyncImage(
+                                model = state.weaponsInfo?.get(it)?.displayIcon,
+                                contentDescription = null,
+                                modifier = Modifier
+                                    .align(Center)
+                                    .sizeIn(maxWidth = 180.dp, maxHeight = 70.dp)
+
+                            )
+                        }
                     }
                 }
             }

@@ -2,6 +2,7 @@ package com.example.data.di
 
 import com.example.data.repositoriesContracts.PlayerCards.PlayerCardsOfflineDataSourceImpl
 import com.example.data.repositoriesContracts.PlayerCards.PlayerCardsOnlineDataSourceImpl
+import com.example.data.repositoriesContracts.Sprays.SpraysOfflineDataSourceImpl
 import com.example.data.repositoriesContracts.Sprays.SpraysOnlineDataSourceImpl
 import com.example.data.repositoriesContracts.agents.AgentsOfflineDataSourceImpl
 import com.example.data.repositoriesContracts.agents.AgentsOnlineDataSourceImpl
@@ -9,6 +10,7 @@ import com.example.data.repositoriesContracts.buddies.BuddiesOfflineDataSourceIm
 import com.example.data.repositoriesContracts.buddies.BuddiesOnlineDataSourceImpl
 import com.example.data.repositoriesContracts.bundles.BundlesOfflineDataSourceImpl
 import com.example.data.repositoriesContracts.bundles.BundlesOnlineDataSourceImpl
+import com.example.data.repositoriesContracts.maps.MapsOfflineDataSourceImpl
 import com.example.data.repositoriesContracts.maps.MapsOnlineDataSourceImpl
 import com.example.data.repositoriesContracts.weapons.WeaponOnlineDataSourceImpl
 import com.example.data.repositoriesContracts.weapons.WeaponsOfflineDataSourceImpl
@@ -43,6 +45,10 @@ abstract class DataSourceModule {
     @Singleton
     abstract fun bindMapsDataSource(mapsOnlineDataSourceImpl: MapsOnlineDataSourceImpl) : MapsOnlineDataSource
 
+    @Singleton
+    @Binds
+    abstract fun bindMapsOfflineDataSource(mapsOfflineDataSourceImpl: MapsOfflineDataSourceImpl) : MapsOfflineDataSource
+
     @Binds
     @Singleton
     abstract fun bindBundlesOnlineDataSource(bundlesOnlineDataSourceImpl: BundlesOnlineDataSourceImpl) : BundlesOnlineDataSource
@@ -69,4 +75,8 @@ abstract class DataSourceModule {
     @Binds
     @Singleton
     abstract fun bindSpraysOnlineDataSource(spraysOnlineDataSourceImpl : SpraysOnlineDataSourceImpl) : SpraysOnlineDataSource
+
+    @Singleton
+    @Binds
+    abstract fun bindSpraysOfflineDataSource (spraysOfflineDataSourceImpl: SpraysOfflineDataSourceImpl) : SpraysOfflineDataSource
 }

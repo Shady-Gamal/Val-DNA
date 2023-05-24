@@ -27,9 +27,9 @@ fun WeaponsLazyGrid(
         items(weaponState.weaponsInfo?.size ?: 0){
 
             Card(modifier = Modifier
+                .padding(5.dp)
                 .width(200.dp)
                 .height(120.dp)
-                .padding(end = 10.dp)
                 .clickable {
                     onItemClick(weaponState.weaponsInfo?.get(it)!!)
                 }

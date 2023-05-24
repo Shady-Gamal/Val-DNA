@@ -31,7 +31,6 @@ fun AgentsLazyGrid(
     onItemClick: (AgentItemDTO) -> Unit
 
 ) {
-    val boxSize = with(LocalDensity.current) { 200.dp.toPx() }
     LazyVerticalGrid(columns = GridCells.Fixed(2), content = {
 
         items(agentsState.agentsInfo?.size ?: 0){

@@ -1,5 +1,7 @@
 package com.example.data.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.example.domain.entities.SprayItemDTO
 import com.google.gson.annotations.SerializedName
 
@@ -12,6 +14,7 @@ data class SpraysResponse(
 	val status: Int? = null
 )
 
+@Entity
 data class SpraysDataItem(
 
 	@field:SerializedName("displayIcon")
@@ -27,22 +30,23 @@ data class SpraysDataItem(
 	val fullIcon: String? = null,
 
 	@field:SerializedName("animationGif")
-	val animationGif: Any? = null,
+	val animationGif: String? = null,
 
 	@field:SerializedName("category")
-	val category: Any? = null,
+	val category: String? = null,
 
+	@PrimaryKey
 	@field:SerializedName("uuid")
-	val uuid: String? = null,
+	val uuid: String,
 
 	@field:SerializedName("themeUuid")
-	val themeUuid: Any? = null,
+	val themeUuid: String? = null,
 
 	@field:SerializedName("fullTransparentIcon")
 	val fullTransparentIcon: String? = null,
 
 	@field:SerializedName("animationPng")
-	val animationPng: Any? = null,
+	val animationPng: String? = null,
 
 	@field:SerializedName("levels")
 	val levels: List<SpraysLevelsItem?>? = null

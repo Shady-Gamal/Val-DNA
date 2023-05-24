@@ -41,7 +41,6 @@ fun SpraysLazyGrid(spraysState: SpraysState) {
 var viewImage by remember {
     mutableStateOf(0)
 }
-
     Column(modifier = Modifier.fillMaxSize()
         ) {
 
@@ -88,14 +87,7 @@ var viewImage by remember {
                        shape = CircleShape,
                        color = RedPrimary
                        )
-
-
-
-
-
-
-                )
-
+            )
         }
     } )}}
 }

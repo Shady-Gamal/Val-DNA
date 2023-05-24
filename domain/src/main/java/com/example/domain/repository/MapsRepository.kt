@@ -12,3 +12,8 @@ interface MapsOnlineDataSource{
 
     suspend fun getMaps() : Flow<Resource<List<MapItemDTO>>>
 }
+interface MapsOfflineDataSource{
+
+    suspend fun getMaps() : Flow<Resource<List<MapItemDTO>>>
+
+}

@@ -20,9 +20,9 @@ class BundlesViewModel @Inject constructor(
 
 
     init {
-        getstate()
+        getBundles()
     }
-    fun getstate(){
+    fun getBundles(){
         viewModelScope.launch {
             getBundlesUseCase.invoke().collect{
 

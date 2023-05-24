@@ -16,6 +16,8 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
+import com.example.valorant.ui.home_screen.components.PlayerCardsLazyGrind
+import com.example.valorant.ui.playerCards_screen.components.PlayerCardsLazyHorizontalGrid
 
 @Composable
 fun PlayerCardsScreen(
@@ -23,13 +25,6 @@ fun PlayerCardsScreen(
     viewModel: PlayerCardsViewModel = hiltViewModel()
 ) {
     val playerCardsState = viewModel.playerCardsState
-    LazyHorizontalGrid(rows = GridCells.Fixed(3), modifier = Modifier.fillMaxSize() , content = {
 
-        items(playerCardsState.playerCardsInfo?.size ?:0){
-
-            AsyncImage(model = playerCardsState.playerCardsInfo?.get(it)?.largeArt, contentDescription = null,
-            modifier = Modifier.fillMaxSize().background(Color.White))
-        }
-
-    })
+    PlayerCardsLazyHorizontalGrid(playerCardsState = playerCardsState)
 }

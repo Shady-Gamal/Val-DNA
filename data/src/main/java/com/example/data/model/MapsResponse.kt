@@ -1,5 +1,7 @@
 package com.example.data.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.example.domain.entities.MapItemDTO
 import com.google.gson.annotations.SerializedName
 
@@ -12,6 +14,7 @@ data class MapsResponse(
 	val status: Int? = null
 )
 
+@Entity
 data class MapsDataItem(
 
 	@field:SerializedName("callouts")
@@ -27,22 +30,23 @@ data class MapsDataItem(
 	val coordinates: String? = null,
 
 	@field:SerializedName("yScalarToAdd")
-	val yScalarToAdd: Any? = null,
+	val yScalarToAdd: Float? = null,
 
 	@field:SerializedName("yMultiplier")
-	val yMultiplier: Any? = null,
+	val yMultiplier: String? = null,
 
+	@PrimaryKey
 	@field:SerializedName("uuid")
-	val uuid: String? = null,
+	val uuid: String,
 
 	@field:SerializedName("displayIcon")
 	val displayIcon: String? = null,
 
 	@field:SerializedName("xMultiplier")
-	val xMultiplier: Any? = null,
+	val xMultiplier: String? = null,
 
 	@field:SerializedName("xScalarToAdd")
-	val xScalarToAdd: Any? = null,
+	val xScalarToAdd: Float? = null,
 
 	@field:SerializedName("assetPath")
 	val assetPath: String? = null,

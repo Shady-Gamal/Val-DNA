@@ -2,20 +2,21 @@ package com.example.valorant
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.width
-import androidx.compose.material3.DrawerValue
-import androidx.compose.material3.ModalNavigationDrawer
-import androidx.compose.material3.rememberDrawerState
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.paint
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.rememberNavController
+import com.example.valorant.ui.theme.BackGround
 import com.example.valorant.ui.theme.ValorantTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -29,6 +30,7 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
                 val drawerState = rememberDrawerState(DrawerValue.Closed)
                 val scope = rememberCoroutineScope()
+
 
                 ModalNavigationDrawer(
                     drawerState = drawerState,
@@ -50,15 +52,24 @@ class MainActivity : ComponentActivity() {
                                 scope.launch { drawerState.close() }
                                 }
                             )}
-                }
-                ) {
-                    Column() {
-                        AppBar(onNavigationIconClick = {
-                            scope.launch { drawerState.apply { if (drawerState.isClosed) open() else close() } }
+                }, content = {
+                        Scaffold(topBar = {
+                            AppBar(onNavigationIconClick = {
+                                scope.launch { drawerState.apply { if (drawerState.isClosed) open() else close() } }
+                            })
+                        }, content = {
+                            Box(modifier = Modifier.padding(it).background(BackGround)){
+                            Navigation(navController = navController)
+
+                            }
                         })
-                        Navigation(navController = navController)
+
+
+
                     }
-                }
+                )
+
+
             }
         }
     }
