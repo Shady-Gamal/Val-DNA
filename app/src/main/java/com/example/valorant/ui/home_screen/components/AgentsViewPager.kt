@@ -18,6 +18,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.BottomCenter
+import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Alignment.Companion.Start
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -50,8 +51,10 @@ fun AgentsViewPager(
         modifier = modifier.padding(10.dp)
 
     ) {
-        if (!(state.agentsInfo.isNullOrEmpty())){
-        Box(modifier = Modifier.background(color = RedPrimary)
+
+
+        Box(modifier = Modifier
+            .background(color = RedPrimary)
             .clickable {
                 onItemClick()
             }) {
@@ -81,74 +84,85 @@ fun AgentsViewPager(
                     .height(185.dp)
 
             ) { page ->
-                Row() {
-                    Column(
-                        modifier = Modifier
-                            .weight(1f)
-                            .padding(start = 10.dp, top = 15.dp), Arrangement.Top
-                    ) {
-                        Row(
-                            modifier = Modifier.align(Start),
-                            verticalAlignment = Alignment.Bottom
+
+                val shownAgent = page*6 + 4
+                if(!(state.agentsInfo.isNullOrEmpty())) {
+                    Row() {
+                        Column(
+                            modifier = Modifier
+                                .weight(1f)
+                                .padding(start = 10.dp, top = 15.dp), Arrangement.Top
                         ) {
+                            Row(
+                                modifier = Modifier.align(Start),
+                                verticalAlignment = Alignment.Bottom
+                            ) {
+                                Text(
+                                    text = state.agentsInfo?.get(shownAgent)?.displayName
+                                        ?: "Error",
+                                    fontSize = 24.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    color = WhiteForTitleText
+                                )
+                                Spacer(modifier = Modifier.width(4.dp))
+                                Text(
+                                    text = state.agentsInfo?.get(shownAgent)?.role?.displayName
+                                        ?: "Baiter", color = WhiteForTitleText
+                                )
+                            }
                             Text(
-                                text = state.agentsInfo?.get(page)?.displayName ?: "Error",
-                                fontSize = 24.sp,
-                                fontWeight = FontWeight.Bold,
-                                color = WhiteForTitleText
+                                text = (state.agentsInfo?.get(shownAgent)?.description?.substring(
+                                    0,
+                                    50
+                                ) + "...") ?: "oopsie",
+                                color = WhiteForBodyText,
+                                fontSize = 15.sp
                             )
-                            Spacer(modifier = Modifier.width(4.dp))
-                            Text(
-                                text = state.agentsInfo?.get(page)?.role?.displayName
-                                    ?: "Baiter", color = WhiteForTitleText
+                            Spacer(modifier = Modifier.height(12.dp))
+                            Image(
+                                painter = painterResource(id = R.drawable.seemore_viewpager),
+                                contentDescription = null,
+                                modifier = Modifier.align(Start)
                             )
                         }
-                        Text(
-                            text = (state.agentsInfo?.get(page)?.description?.substring(
-                                0,
-                                50
-                            ) + "...") ?: "oopsie",
-                            color = WhiteForBodyText,
-                            fontSize = 15.sp
+                        Box(
+                            Modifier
+                                .weight(1f)
                         )
-                        Spacer(modifier = Modifier.height(12.dp))
-                        Image(
-                            painter = painterResource(id = R.drawable.seemore_viewpager),
-                            contentDescription = null,
-                            modifier = Modifier.align(Start)
-                        )
-                    }
-                    Box(
-                        Modifier
-                            .weight(1f)
-                    )
-                    {
-                        AsyncImage(
-                            model = state.agentsInfo?.get(page)?.background,
-                            contentDescription = null,
-                            modifier = Modifier
-                                .align(
-                                    Alignment.TopEnd
-                                )
+                        {
+                            AsyncImage(
+                                model = state.agentsInfo?.get(shownAgent)?.background,
+                                contentDescription = null,
+                                modifier = Modifier
+                                    .align(
+                                        Alignment.TopEnd
+                                    )
 
-                                .fillMaxSize()
-                                .scale(1f, 1.5f),
-                            contentScale = ContentScale.FillBounds
+                                    .fillMaxSize()
+                                    .scale(1f, 1.5f),
+                                contentScale = ContentScale.FillBounds
 
 
-                        )
+                            )
 
-                        AsyncImage(
-                            model = state.agentsInfo?.get(page)?.fullPortrait,
-                            contentDescription = null,
-                            modifier = Modifier
-                                .align(Alignment.TopEnd)
-                                .scale(2f)
-                                .offset(0.dp, 30.dp),
-                            contentScale = ContentScale.FillHeight
-                        )
+                            AsyncImage(
+                                model = state.agentsInfo?.get(shownAgent)?.fullPortrait,
+                                contentDescription = null,
+                                modifier = Modifier
+                                    .align(Alignment.TopEnd)
+                                    .scale(2f)
+                                    .offset(0.dp, 30.dp),
+                                contentScale = ContentScale.FillHeight
+                            )
+
+                        }
 
                     }
+                }else  if (state.isLoading){
+                    Box(modifier = Modifier.fillMaxSize()) {
+                        CircularProgressIndicator(modifier = Modifier.align(Center) )
+                    }
+
 
                 }
             }
@@ -172,14 +186,17 @@ fun AgentsViewPager(
                     )
                 }
             }
+
         }
+
+
+
 
     }
-        else{
-            CircularProgressIndicator()
-        }
 
-    }}
+
+
+}
 
 
 

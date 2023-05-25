@@ -1,5 +1,6 @@
 package com.example.valorant.ui.home_screen
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.rememberScrollState
@@ -21,9 +22,14 @@ fun HomeScreen(
 
     ) {
 
+
     val state = viewModel.Homestate
 
-    Column(modifier = Modifier.verticalScroll(rememberScrollState()).background(BackGround)) {
+
+
+    Column(modifier = Modifier
+        .verticalScroll(rememberScrollState())
+        .background(BackGround)) {
         AgentsViewPager(state = state, onItemClick = {
             navController.navigate(Screen.AgentScreen.route)
         })

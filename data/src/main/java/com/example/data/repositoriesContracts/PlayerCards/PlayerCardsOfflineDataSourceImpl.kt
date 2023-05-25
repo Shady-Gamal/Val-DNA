@@ -25,7 +25,6 @@ class PlayerCardsOfflineDataSourceImpl @Inject constructor(
         }.onStart {
             emit(Resource.Loading())
         }.catch {
-            Log.e("tag", it.message ?: "null" )
             emit(Resource.Error(it.message ?: "error"))
         }
     }

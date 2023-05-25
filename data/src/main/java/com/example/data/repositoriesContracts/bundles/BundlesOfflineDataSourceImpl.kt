@@ -24,7 +24,6 @@ class BundlesOfflineDataSourceImpl @Inject constructor(val valorantDatabase: Val
         }.onStart {
             emit(Resource.Loading())
         }.catch {
-            Log.e("tag", it.message ?: "null" )
             emit(Resource.Error(it.message ?: "error"))
         }
     }

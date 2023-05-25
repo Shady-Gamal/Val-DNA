@@ -33,23 +33,20 @@ class HomeViewModel @Inject constructor(
         getBundles()
 
     }
-    fun getAgents(){
+    private fun getAgents(){
         viewModelScope.launch {
             getAgentsUseCase.invoke().collect{
                 when (it){
 
-                    is Resource.Success -> {
-                        Homestate = Homestate.copy(
+                    is Resource.Success -> Homestate = Homestate.copy(
                             agentsInfo = it.data
                         )
-                        Log.e("tag", Homestate.agentsInfo?.size.toString() )
-                    }
-                    is Resource.Error -> {
+
+                    is Resource.Error ->
                         Homestate = Homestate.copy(
                             error = it.message
                         )
-                        Log.e("tag", it.message.toString())
-                    }
+
                     is Resource.Loading -> Homestate = Homestate.copy(
                         isLoading = true
                     )
@@ -57,7 +54,7 @@ class HomeViewModel @Inject constructor(
             }
         }
     }
-    fun getWeapons(){
+    private fun getWeapons(){
 
         viewModelScope.launch {
             getWeaponsUseCase.invoke().collect{
@@ -79,7 +76,7 @@ class HomeViewModel @Inject constructor(
 
         }
     }
-    fun getMaps(){
+    private fun getMaps(){
 viewModelScope.launch {
     getMapsUseCase.invoke().collect{
 
@@ -92,17 +89,21 @@ viewModelScope.launch {
 
                 error = it.message
             )
-            is Resource.Loading -> Homestate = Homestate.copy(
+            is Resource.Loading -> {
+                Homestate = Homestate.copy(
 
-                isLoading = true
-            )
+                    isLoading = true
+
+                )
+
+            }
         }
     }
 }
 
 
     }
-    fun getPlayerCards(){
+    private fun getPlayerCards(){
 
         viewModelScope.launch {
             getPlayerCardsUseCase.invoke().collect{
@@ -122,26 +123,25 @@ viewModelScope.launch {
         }
     }
 
-    fun getBundles(){
+    private fun getBundles(){
         viewModelScope.launch {
             getBundlesUseCase.invoke().collect{
 
                 when (it){
-                    is Resource.Success -> {
+                    is Resource.Success ->
                         Homestate = Homestate.copy(
                             bundlesInfo = it.data
                         )
-                        Log.e("tag", it.data?.size.toString() )
-                    }
+
+
                     is Resource.Loading -> Homestate = Homestate.copy(
                         isLoading = true
                     )
-                    is Resource.Error -> {
+                    is Resource.Error ->
                         Homestate = Homestate.copy(
                             error = it.message
                         )
-                        Log.e("tag", it.message ?: "null" )
-                    }
+
 
                 }
             }

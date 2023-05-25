@@ -27,21 +27,18 @@ class BundlesViewModel @Inject constructor(
             getBundlesUseCase.invoke().collect{
 
                 when (it){
-                    is Resource.Success -> {
+                    is Resource.Success ->
                         bundlesState = bundlesState.copy(
                             bundlesInfo = it.data
                         )
-                        Log.e("tag", it.data?.size.toString() )
-                    }
+
                     is Resource.Loading -> bundlesState = bundlesState.copy(
                         isLoading = true
                     )
-                    is Resource.Error -> {
+                    is Resource.Error ->
                         bundlesState = bundlesState.copy(
                             error = it.message
                         )
-                        Log.e("tag", it.message ?: "null" )
-                    }
 
                 }
             }

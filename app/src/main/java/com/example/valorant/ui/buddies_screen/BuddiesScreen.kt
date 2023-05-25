@@ -1,5 +1,6 @@
 package com.example.valorant.ui.buddies_screen
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
@@ -23,4 +24,5 @@ fun BuddiesScreen(
     val buddiesState = viewModel.buddiesState
         BuddiesLazyGrid(buddiesState = buddiesState)
 
+    Log.e("TAG", buddiesState.buddiesInfo?.size.toString() )
 }

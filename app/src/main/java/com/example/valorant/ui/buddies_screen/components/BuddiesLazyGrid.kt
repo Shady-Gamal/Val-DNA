@@ -30,6 +30,10 @@ fun BuddiesLazyGrid (buddiesState : BuddiesState) {
     Column(modifier = Modifier.fillMaxSize()
     ) {
 
+
+
+
+
         Card(modifier = Modifier
             .padding(20.dp)
             .fillMaxWidth(),
@@ -67,7 +71,8 @@ fun BuddiesLazyGrid (buddiesState : BuddiesState) {
                             .weight(1f)
                             .padding(10.dp)
                             .clip(shape = CircleShape)
-                            .border(width = 5.dp,
+                            .border(
+                                width = 5.dp,
                                 shape = CircleShape,
                                 color = RedPrimary
                             )

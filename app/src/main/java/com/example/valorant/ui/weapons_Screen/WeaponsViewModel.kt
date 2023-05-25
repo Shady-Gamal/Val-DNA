@@ -1,6 +1,5 @@
 package com.example.valorant.ui.weapons_Screen
 
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -21,16 +20,14 @@ class WeaponsViewModel @Inject constructor(
      var weaponState by mutableStateOf(WeaponState())
     private set
 
-    val arrayList = ArrayList<WeaponItemDTO>()
 
     init {
-        WeaponStateRetrival()
-         devider()
-        Log.e("tag", arrayList.size.toString() )
+        getWeapons()
+
 
     }
 
-    fun WeaponStateRetrival(){
+    fun getWeapons(){
         viewModelScope.launch{
             getWeaponsUseCase.invoke().collect{
                 when (it){
@@ -53,17 +50,4 @@ class WeaponsViewModel @Inject constructor(
 
     }
 
-
-
-    fun devider(){
-
-        weaponState.weaponsInfo?.forEach {
-
-            if(it.displayName == "Odin"){
-                arrayList.add(it)
-            }
-        }
-
-
-    }
 }
