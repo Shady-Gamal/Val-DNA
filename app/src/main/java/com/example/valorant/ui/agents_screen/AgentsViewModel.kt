@@ -12,8 +12,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class AgetnsViewModel @Inject constructor(
-   val getAgentsUseCase: GetAgentsUseCase
+class AgentsViewModel @Inject constructor(
+    private val getAgentsUseCase: GetAgentsUseCase
 ) : ViewModel() {
 var agentsState by mutableStateOf(AgentsState())
 
@@ -23,7 +23,7 @@ var agentsState by mutableStateOf(AgentsState())
     }
 
 
-fun getAgents(){
+private fun getAgents(){
     viewModelScope.launch {
         getAgentsUseCase.invoke().collect(){
             when (it){

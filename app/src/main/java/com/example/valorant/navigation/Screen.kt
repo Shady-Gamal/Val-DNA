@@ -1,4 +1,4 @@
-package com.example.valorant
+package com.example.valorant.navigation
 
 sealed class Screen(val route : String){
 object HomeScreen : Screen("main_screen")
@@ -14,8 +14,10 @@ object AgentScreen : Screen("agents_screen")
 
     object MapsScreen : Screen("maps_screen")
 
-    object WeaponDetailsScreen : Screen ("weaponDetails_screen")
-    object SplashScreen : Screen ("Splash_screen")
+    object WeaponDetailsScreen : Screen("weaponDetails_screen")
+    object WeaponSkinsScreen : Screen("weaponSkins_screen")
+
+    object SkinChromasScreen : Screen("skinChromas_screen")
 
 
 

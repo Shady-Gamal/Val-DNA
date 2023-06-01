@@ -1,4 +1,4 @@
-package com.example.valorant
+package com.example.valorant.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
@@ -6,6 +6,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.example.data.model.WeaponsSkinsItem
 import com.example.valorant.ui.agentDetails_screen.AgentsInfoScreen
 import com.example.valorant.ui.agents_screen.AgentsScreen
 import com.example.valorant.ui.buddies_screen.BuddiesScreen
@@ -15,6 +16,7 @@ import com.example.valorant.ui.maps_screen.MapsScreen
 import com.example.valorant.ui.playerCards_screen.PlayerCardsScreen
 import com.example.valorant.ui.sprays_screen.SpraysScreen
 import com.example.valorant.ui.weaponDetails_screen.WeaponDetailsScreen
+import com.example.valorant.ui.weaponSkins_screen.WeaponSkinsScreen
 import com.example.valorant.ui.weapons_Screen.WeaponsScreen
 
 
@@ -73,6 +75,18 @@ fun Navigation(navController: NavHostController) {
         ){
             
             WeaponDetailsScreen(navController = navController)
+        }
+
+        composable(route = Screen.WeaponSkinsScreen.route + "/{weaponId}", arguments =
+        listOf(
+            navArgument("weaponId"){
+                type = NavType.StringType
+            }
+        )
+        ){
+
+            WeaponSkinsScreen(navController = navController)
+
         }
 
 

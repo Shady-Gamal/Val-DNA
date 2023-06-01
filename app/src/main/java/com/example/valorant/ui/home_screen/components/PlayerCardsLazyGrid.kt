@@ -6,8 +6,10 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
@@ -15,6 +17,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import coil.compose.SubcomposeAsyncImage
 import com.example.valorant.ui.home_screen.HomeState
 import com.example.valorant.ui.theme.RedPrimary
 
@@ -37,7 +40,7 @@ fun PlayerCardsLazyGrind(
         items(homeState.playerCardsInfo?.size ?: 0){
 
 
-            AsyncImage(model = homeState.playerCardsInfo?.get(it)?.wideArt, contentDescription = null,
+            SubcomposeAsyncImage(model = homeState.playerCardsInfo?.get(it)?.wideArt, contentDescription = null,
             modifier = Modifier
                 .padding(end = 10.dp, bottom = 10.dp)
                 .clip(shape = CircleShape)
@@ -46,7 +49,12 @@ fun PlayerCardsLazyGrind(
                     onItemClick()
                 }
                ,
-            contentScale = ContentScale.FillHeight)
+            contentScale = ContentScale.FillHeight,
+            loading = {
+                Box(modifier = Modifier.fillMaxSize()) {
+                    CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+                }
+            })
         }
     } )}
 

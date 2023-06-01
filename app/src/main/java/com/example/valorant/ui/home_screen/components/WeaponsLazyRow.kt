@@ -10,13 +10,16 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.ProgressIndicatorDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Alignment.Companion.TopCenter
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -30,39 +33,48 @@ import com.example.valorant.ui.theme.RedPrimary
 import com.example.valorant.R
 import kotlin.math.ceil
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun WeaponsLazyRow(state : HomeState,
 onWeaponClick: (WeaponItemDTO) -> Unit,
-onSeeMoreClick : () -> Unit) {
+onSeeMoreClick : () -> Unit,
+) {
 
-    Column(modifier = Modifier.padding(10.dp)) {
-
-
+    Column(modifier = Modifier.padding(10.dp).semantics {
+        testTagsAsResourceId = false
+    }
+        ) {
         Text(text = "Guns", fontSize = 25.sp,
         color = RedPrimary,
         fontWeight = FontWeight.Bold
         , modifier = Modifier.padding(bottom = 5.dp))
-    
-        LazyRow(){
+
+        LazyRow(modifier = Modifier.testTag("myLazyColumn")){
         items(6){
             Card(modifier = Modifier
                 .width(200.dp)
                 .height(120.dp)
                 .padding(end = 10.dp)
+
             ) {
                 Box(
                     modifier = Modifier
                         .background(color = PinkForLazyRows)
                         .fillMaxSize()
+
+
                         ) {
                         if(!(state.agentsInfo.isNullOrEmpty())){
                         if (it == 5) {
 
                             Box(modifier = Modifier
+
                                 .fillMaxSize()
                                 .clickable {
                                     onSeeMoreClick()
-                                }) {
+                                }
+                                .testTag("myLazyColumn")
+                                ) {
                                 Text(
                                     text = "See More", modifier = Modifier
                                         .align(TopCenter)
@@ -74,6 +86,7 @@ onSeeMoreClick : () -> Unit) {
                                     modifier = Modifier
                                         .align(Center)
                                         .size(60.dp)
+
                                 )
                             }
                         } else {
@@ -83,7 +96,8 @@ onSeeMoreClick : () -> Unit) {
                                 {
                                     onWeaponClick(state.weaponsInfo?.get(it)!!)
                                 }
-                                .fillMaxSize()) {
+                                .fillMaxSize()
+                                ) {
                                 Text(
                                     text = state.weaponsInfo?.get(it)?.displayName ?: "Loading",
                                     modifier = Modifier
@@ -108,12 +122,6 @@ onSeeMoreClick : () -> Unit) {
                                 )
                             }
                         }
-                    } else if (state.isLoading){
-                        Box(modifier = Modifier.fillMaxSize()){
-
-                            CircularProgressIndicator(modifier = Modifier.align(Center))
-                        }
-
                     }
 
 

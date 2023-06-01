@@ -3,7 +3,7 @@ package com.example.valorant.ui.weapons_Screen
 import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.example.valorant.Screen
+import com.example.valorant.navigation.Screen
 import com.example.valorant.ui.weapons_Screen.components.WeaponsLazyGrid
 
 @Composable

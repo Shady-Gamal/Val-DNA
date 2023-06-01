@@ -1,16 +1,15 @@
 package com.example.valorant.ui.home_screen
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import coil.compose.AsyncImage
-import com.example.valorant.Screen
+import com.example.valorant.navigation.Screen
 import com.example.valorant.ui.home_screen.components.*
 import com.example.valorant.ui.theme.BackGround
 
@@ -18,18 +17,14 @@ import com.example.valorant.ui.theme.BackGround
 @Composable
 fun HomeScreen(
     navController: NavController,
-    viewModel: HomeViewModel = hiltViewModel(),
-
+    viewModel: HomeViewModel = hiltViewModel()
     ) {
 
-
     val state = viewModel.Homestate
-
-
-
     Column(modifier = Modifier
         .verticalScroll(rememberScrollState())
-        .background(BackGround)) {
+        .background(BackGround)
+        .testTag("test_tag_home_screen")) {
         AgentsViewPager(state = state, onItemClick = {
             navController.navigate(Screen.AgentScreen.route)
         })

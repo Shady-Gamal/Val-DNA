@@ -80,7 +80,7 @@ modifier: Modifier = Modifier.height(300.dp)) {
                         contentDescription = null,
                         modifier = Modifier
 
-                            .offset( x = 50.dp)
+                            .offset( x = 30.dp)
                             .heightIn(max = 300.dp)
                             .wrapContentSize(),
                         contentScale = ContentScale.Crop

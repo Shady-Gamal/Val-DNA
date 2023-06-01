@@ -30,6 +30,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import coil.compose.SubcomposeAsyncImage
 import com.example.valorant.R
 import com.example.valorant.ui.home_screen.HomeState
 import com.example.valorant.ui.theme.RedPrimary
@@ -140,19 +141,28 @@ fun AgentsViewPager(
 
                                     .fillMaxSize()
                                     .scale(1f, 1.5f),
-                                contentScale = ContentScale.FillBounds
+                                contentScale = ContentScale.FillBounds,
+
 
 
                             )
 
-                            AsyncImage(
+                            SubcomposeAsyncImage(
                                 model = state.agentsInfo?.get(shownAgent)?.fullPortrait,
                                 contentDescription = null,
                                 modifier = Modifier
                                     .align(Alignment.TopEnd)
                                     .scale(2f)
                                     .offset(0.dp, 30.dp),
-                                contentScale = ContentScale.FillHeight
+                                contentScale = ContentScale.FillHeight,
+                                loading = {
+
+                                    Box(modifier = Modifier
+                                        .fillMaxSize()
+                                        .offset(0.dp, (-30).dp),){
+                                        CircularProgressIndicator(modifier = Modifier.align(Center))
+                                    }
+                                }
                             )
 
                         }
@@ -193,7 +203,6 @@ fun AgentsViewPager(
 
 
     }
-
 
 
 }

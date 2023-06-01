@@ -1,4 +1,7 @@
-package com.example.valorant
+package com.example.valorant.main_activity.components
+
+import com.example.valorant.R
+import com.example.valorant.navigation.Screen
 
 data class MenuItem(
     val id : String,

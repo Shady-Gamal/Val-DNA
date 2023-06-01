@@ -17,7 +17,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.compose.SubcomposeAsyncImage
-import com.example.data.model.BuddiesResponse
 import com.example.valorant.ui.buddies_screen.BuddiesState
 import com.example.valorant.ui.sprays_screen.SpraysState
 import com.example.valorant.ui.theme.RedPrimary

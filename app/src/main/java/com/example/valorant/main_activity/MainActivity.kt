@@ -1,6 +1,5 @@
-package com.example.valorant
+package com.example.valorant.main_activity
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -14,13 +13,18 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.paint
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.valorant.*
+import com.example.valorant.main_activity.components.AppBar
+import com.example.valorant.navigation.Navigation
+import com.example.valorant.navigation.Screen
+import com.example.valorant.R
+import com.example.valorant.main_activity.components.navigationList
 import com.example.valorant.ui.theme.BackGround
 import com.example.valorant.ui.theme.ValorantTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -63,6 +67,10 @@ installSplashScreen().apply {
                     Screen.AgentDetailsScreen.route + "/{agentId}" -> {
                         topBarState.value = false
                     }
+                    Screen.WeaponSkinsScreen.route + "/{weaponId}" -> {
+
+                        topBarState.value = false
+                    }
                     else -> topBarState.value = true
                 }
 
@@ -87,7 +95,8 @@ installSplashScreen().apply {
                                 }
                                 scope.launch { drawerState.close() }
                                 }
-                            )}
+                            )
+                        }
                 }, content = {
                         Scaffold(
                             topBar = {
@@ -120,12 +129,6 @@ installSplashScreen().apply {
                     }
                 )
 
-
-                @OptIn(ExperimentalMaterial3Api::class)
-                @Composable
-                fun topassbar() {
-
-                }
 
 
             }

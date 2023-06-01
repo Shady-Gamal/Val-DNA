@@ -1,4 +1,6 @@
-package com.example.valorant.ui.weaponDetails_screen
+package com.example.valorant.ui.weaponSkins_screen
+
+import com.example.valorant.ui.weaponDetails_screen.WeaponDetailsState
 
 import android.util.Log
 import androidx.compose.runtime.getValue
@@ -14,39 +16,39 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class WeaponDetailsViewModel @Inject constructor(
-savedStateHandle: SavedStateHandle,
-val getSelectedWeaponUseCase: GetSelectedWeaponUseCase
+class WeaponSkinsViewModel @Inject constructor(
+    savedStateHandle: SavedStateHandle,
+    val getSelectedWeaponUseCase: GetSelectedWeaponUseCase
 ) : ViewModel() {
 
-    var weaponDetailsState by mutableStateOf(WeaponDetailsState())
+    var weaponSkinsState by mutableStateOf(WeaponSkinsState())
 
     init {
         savedStateHandle.get<String>("weaponId")?.let {
-            getSelectedWeapon(it)
+            getSelectedWeaponSkins(it)
         }
     }
 
-    fun getSelectedWeapon(uuid : String){
+    fun getSelectedWeaponSkins(uuid : String){
 
         viewModelScope.launch {
             getSelectedWeaponUseCase.invoke(uuid).collect{
 
                 when (it){
                     is Resource.Success -> {
-                        weaponDetailsState = weaponDetailsState.copy(
-                            selectedWeaponDetails = it.data
+                        weaponSkinsState = weaponSkinsState.copy(
+                            WeaponSkins = it.data
                         )
                         Log.e("weps", it.data?.skins?.size.toString() )
                     }
                     is Resource.Error -> {
-                        weaponDetailsState = weaponDetailsState.copy(
+                        weaponSkinsState = weaponSkinsState.copy(
                             error = it.message)
                         Log.e("weps", it.message.toString() )
                     }
 
 
-                    is Resource.Loading -> weaponDetailsState = weaponDetailsState.copy(
+                    is Resource.Loading -> weaponSkinsState = weaponSkinsState.copy(
                         isLoading = true
                     )
 

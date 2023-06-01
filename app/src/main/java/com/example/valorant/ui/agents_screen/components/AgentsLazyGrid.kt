@@ -6,9 +6,11 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -17,10 +19,12 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import coil.compose.SubcomposeAsyncImage
 import com.example.domain.entities.AgentItemDTO
 import com.example.valorant.ui.agents_screen.AgentsState
 
@@ -31,7 +35,8 @@ fun AgentsLazyGrid(
     onItemClick: (AgentItemDTO) -> Unit
 
 ) {
-    LazyVerticalGrid(columns = GridCells.Fixed(2), content = {
+    LazyVerticalGrid(columns = GridCells.Fixed(2),
+        modifier = Modifier.testTag("Agents"), content = {
 
         items(agentsState.agentsInfo?.size ?: 0){
 
@@ -95,12 +100,18 @@ fun AgentsLazyGrid(
 
 
 
-                    AsyncImage(model = agentsState.agentsInfo?.get(it)?.fullPortrait, contentDescription = null
+                    SubcomposeAsyncImage(model = agentsState.agentsInfo?.get(it)?.fullPortrait, contentDescription = null
                         , modifier = Modifier
                             .scale(1.5f)
                             .offset(y = (30).dp)
                             ,
-                        contentScale = ContentScale.FillHeight
+                        contentScale = ContentScale.FillHeight,
+                        loading = {
+                            Box(modifier = Modifier.fillMaxSize()) {
+                                CircularProgressIndicator(modifier = Modifier.align(Center)
+                                    .offset(y = (-30).dp))
+                            }
+                        }
 
 
 
@@ -115,5 +126,3 @@ fun AgentsLazyGrid(
 
     })
 }
-val String.color
-    get() = Color(android.graphics.Color.parseColor(this))

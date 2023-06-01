@@ -10,6 +10,7 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -122,7 +123,7 @@ if(!(mapsState.mapsInfo.isNullOrEmpty())) {
 }
     else if (mapsState.isLoading){
         Box(modifier = Modifier.fillMaxSize()) {
-            CircularProgressIndicator(modifier = Modifier.size(100.dp))
+            CircularProgressIndicator(modifier = Modifier.size(100.dp).align(Center))
         }
 
 
