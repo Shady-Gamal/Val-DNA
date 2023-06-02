@@ -3,6 +3,7 @@ package com.example.valorant.ui.weaponDetails_screen
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
@@ -50,8 +51,8 @@ fun WeaponDetailsScreen(
             WeaponStatsItem(title = "price", value = selectedWeaponDetailsState.selectedWeaponDetails?.shopData?.cost.toString())
         }
 
-        Button(onClick = { navController.navigate(Screen.WeaponSkinsScreen.route + "/${selectedWeaponDetailsState.selectedWeaponDetails?.uuid}") }) {
-            
+        Button(onClick = { navController.navigate(Screen.WeaponSkinsScreen.route + "/${selectedWeaponDetailsState.selectedWeaponDetails?.uuid}") }){
+            Text(text = "Check out the weapon's skins")
         }
 
     }
