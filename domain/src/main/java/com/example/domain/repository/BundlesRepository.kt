@@ -12,7 +12,7 @@ interface BundlesRepository {
 }
 interface BundlesOnlineDataSource{
 
-    suspend fun getBundles() : Flow<Resource<List<BundleItemDTO>>>
+    suspend fun getBundles()
 
 }
 

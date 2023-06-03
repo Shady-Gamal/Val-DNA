@@ -11,7 +11,7 @@ interface PlayerTitlesRepository {
 }
 interface PlayerTitlesOnlineDataSource{
 
-    suspend fun getPlayerTitles() : Flow<Resource<List<PlayerTitleIemDTO>>>
+    suspend fun getPlayerTitles()
 
 }
 

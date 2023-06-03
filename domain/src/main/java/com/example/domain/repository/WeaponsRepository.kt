@@ -14,7 +14,7 @@ interface WeaponsRepository {
 }
 interface WeaponsOnlineDataSource{
 
-    suspend fun getWeapons() : Flow<Resource<List<WeaponItemDTO>>>
+    suspend fun getWeapons()
 
 }
 

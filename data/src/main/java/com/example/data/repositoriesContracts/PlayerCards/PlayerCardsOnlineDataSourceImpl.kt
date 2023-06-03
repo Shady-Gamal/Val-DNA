@@ -1,5 +1,7 @@
 package com.example.data.repositoriesContracts.PlayerCards
 
+import android.content.Context
+import android.widget.Toast
 import com.example.data.database.ValorantDatabase
 import com.example.data.model.toPlayerCardItemDTO
 import com.example.data.repositoriesContracts.WebServices
@@ -13,26 +15,24 @@ import kotlinx.coroutines.flow.onStart
 import javax.inject.Inject
 
 class PlayerCardsOnlineDataSourceImpl @Inject constructor(val webServices: WebServices,
-val valorantDatabase: ValorantDatabase) : PlayerCardsOnlineDataSource {
-    override suspend fun getPlayerCards(): Flow<Resource<List<PlayerCardItemDTO>>> {
+val valorantDatabase: ValorantDatabase,
+val context: Context) : PlayerCardsOnlineDataSource {
+    override suspend fun getPlayerCards() {
 
 
-        val response = webServices.getPlayerCards()
+        try {
 
-        response.data?.let { valorantDatabase.getPlayerCardsDao().savePlayerCards(it) }
 
-        return flow<Resource<List<PlayerCardItemDTO>>> {
-            val successfulResponse = Resource.Success(response.data?.map {
-                it.toPlayerCardItemDTO()
-            }!!)
+            val response = webServices.getPlayerCards()
 
-            emit(successfulResponse)
-        }.onStart {
-            emit(Resource.Loading())
-        }.catch {
-
-            emit(Resource.Error(it.message ?: "Error"))
+            response.data?.let { valorantDatabase.getPlayerCardsDao().savePlayerCards(it) }
         }
+        catch (ex : Exception){
+
+            Toast.makeText(context,"something is wrong with the server", Toast.LENGTH_LONG  ).show()
+
+        }
+
     }
 
 }

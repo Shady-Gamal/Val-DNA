@@ -12,7 +12,7 @@ import com.example.data.repositoriesContracts.bundles.BundlesOfflineDataSourceIm
 import com.example.data.repositoriesContracts.bundles.BundlesOnlineDataSourceImpl
 import com.example.data.repositoriesContracts.maps.MapsOfflineDataSourceImpl
 import com.example.data.repositoriesContracts.maps.MapsOnlineDataSourceImpl
-import com.example.data.repositoriesContracts.weapons.WeaponOnlineDataSourceImpl
+import com.example.data.repositoriesContracts.weapons.WeaponsOnlineDataSourceImpl
 import com.example.data.repositoriesContracts.weapons.WeaponsOfflineDataSourceImpl
 import com.example.domain.repository.*
 import dagger.Binds
@@ -35,7 +35,7 @@ abstract class DataSourceModule {
 
     @Binds
     @Singleton
-    abstract fun bindWeaponsDataSource(weaponOnlineDataSourceImpl: WeaponOnlineDataSourceImpl) : WeaponsOnlineDataSource
+    abstract fun bindWeaponsDataSource(weaponsOnlineDataSourceImpl: WeaponsOnlineDataSourceImpl) : WeaponsOnlineDataSource
 
     @Singleton
     @Binds

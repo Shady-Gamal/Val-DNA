@@ -94,7 +94,9 @@ onSeeMoreClick : () -> Unit,
                             Box(modifier = Modifier
                                 .clickable
                                 {
-                                    onWeaponClick(state.weaponsInfo?.get(it)!!)
+                                    if (!(state.weaponsInfo.isNullOrEmpty())) {
+                                        onWeaponClick(state.weaponsInfo.get(it)!!)
+                                    }
                                 }
                                 .fillMaxSize()
                                 ) {

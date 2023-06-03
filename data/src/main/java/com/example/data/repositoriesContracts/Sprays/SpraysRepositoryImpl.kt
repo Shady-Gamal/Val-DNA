@@ -21,7 +21,7 @@ val context: Context) : SpraysRepository {
             return spraysOfflineDataSource.getSprays()
 
         }else{
-            return spraysOnlineDataSource.getSprays()
+            return spraysOfflineDataSource.getSprays()
 
         }
     }

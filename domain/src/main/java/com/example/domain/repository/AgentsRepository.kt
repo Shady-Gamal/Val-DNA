@@ -13,7 +13,7 @@ interface AgentsRepository {
 }
 interface AgentsOnlineDataSource{
 
-        suspend fun getAgents() : Flow<Resource<List<AgentItemDTO>>>
+        suspend fun getAgents()
 
 }
 interface AgentsOfflineDataSource{

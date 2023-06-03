@@ -1,5 +1,7 @@
 package com.example.data.repositoriesContracts.bundles
 
+import android.content.Context
+import android.widget.Toast
 import com.example.data.database.ValorantDatabase
 import com.example.data.model.toBundleItemDTO
 import com.example.data.repositoriesContracts.WebServices
@@ -13,23 +15,24 @@ import kotlinx.coroutines.flow.onStart
 import javax.inject.Inject
 
 class BundlesOnlineDataSourceImpl @Inject constructor(val webServices: WebServices,
-val valorantDatabase: ValorantDatabase) :
+val valorantDatabase: ValorantDatabase,
+val context: Context) :
     BundlesOnlineDataSource {
-    override suspend fun getBundles(): Flow<Resource<List<BundleItemDTO>>> {
-        val response = webServices.getBundles()
+    override suspend fun getBundles(){
 
-        response.data?.let { valorantDatabase.getBundlesDao().saveBundles(it) }
+        try {
 
 
-        return flow<Resource<List<BundleItemDTO>>>{
-            val successfulResponse = Resource.Success(response.data?.map {
-                it.toBundleItemDTO()
-            }!!)
-            emit(successfulResponse)
-        }.onStart {
-            emit(Resource.Loading())
-        }.catch {
-            emit(Resource.Error(it.message ?: "an error has occured"))
+            val response = webServices.getBundles()
 
-        } }
+            response.data?.let { valorantDatabase.getBundlesDao().saveBundles(it) }
+        }
+        catch (ex : Exception){
+
+            Toast.makeText(context,"something is wrong with the server", Toast.LENGTH_LONG  ).show()
+
+
+        }
+
+         }
 }

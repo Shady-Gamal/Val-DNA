@@ -1,5 +1,7 @@
 package com.example.data.repositoriesContracts.Sprays
 
+import android.content.Context
+import android.widget.Toast
 import com.example.data.database.ValorantDatabase
 import com.example.data.model.toSprayItemDTO
 import com.example.data.repositoriesContracts.WebServices
@@ -13,25 +15,21 @@ import kotlinx.coroutines.flow.onStart
 import javax.inject.Inject
 
 class SpraysOnlineDataSourceImpl @Inject constructor(val webServices: WebServices,
-val valorantDatabase: ValorantDatabase) : SpraysOnlineDataSource {
-    override suspend fun getSprays(): Flow<Resource<List<SprayItemDTO>>> {
+val valorantDatabase: ValorantDatabase,
+val context: Context) : SpraysOnlineDataSource {
+    override suspend fun getSprays() {
 
 
+        try {
 
-        val response = webServices.getSprays()
 
-        response.data?.let { valorantDatabase.getSpraysDao().saveSprays(it) }
+            val response = webServices.getSprays()
 
-        return flow<Resource<List<SprayItemDTO>>> {
+            response.data?.let { valorantDatabase.getSpraysDao().saveSprays(it) }
+        }
+        catch (ex : Exception){
 
-            val successfulResponse = Resource.Success(response.data?.map {
-                it.toSprayItemDTO()
-            }!!)
-            emit(successfulResponse)
-        }.onStart {
-            emit(Resource.Loading())
-        }.catch {
-            emit(Resource.Error(it.message ?: "error"))
+
         }
     }
 }

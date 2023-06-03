@@ -11,7 +11,7 @@ interface SpraysRepository {
 }
 interface SpraysOnlineDataSource{
 
-    suspend fun getSprays() : Flow<Resource<List<SprayItemDTO>>>
+    suspend fun getSprays()
 
 }
 

@@ -11,7 +11,7 @@ interface BuddiesRepository {
 }
 interface BuddiesOnlineDataSource{
 
-    suspend fun getBuddies() : Flow<Resource<List<BuddyItemDTO>>>
+    suspend fun getBuddies()
 
 }
 

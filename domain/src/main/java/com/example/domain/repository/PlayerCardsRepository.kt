@@ -12,7 +12,7 @@ interface PlayerCardsRepository {
 }
 interface PlayerCardsOnlineDataSource{
 
-    suspend fun getPlayerCards() : Flow<Resource<List<PlayerCardItemDTO>>>
+    suspend fun getPlayerCards()
 
 }
 

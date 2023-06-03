@@ -10,7 +10,7 @@ interface MapsRepository {
 }
 interface MapsOnlineDataSource{
 
-    suspend fun getMaps() : Flow<Resource<List<MapItemDTO>>>
+    suspend fun getMaps()
 }
 interface MapsOfflineDataSource{
 
