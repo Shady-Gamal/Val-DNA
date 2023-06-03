@@ -17,7 +17,6 @@ object AgentScreen : Screen("agents_screen")
     object WeaponDetailsScreen : Screen("weaponDetails_screen")
     object WeaponSkinsScreen : Screen("weaponSkins_screen")
 
-    object SkinChromasScreen : Screen("skinChromas_screen")
 
 
 
