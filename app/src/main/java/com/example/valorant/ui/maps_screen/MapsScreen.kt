@@ -32,13 +32,6 @@ fun MapsScreen(
 
     val mapsState = viewModel.mapsState
 
-    Log.e("tag4", mapsState.isLoading.toString() )
-    Log.e("tag4", mapsState.mapsInfo?.size.toString() )
-
-
-
-
-
     var selectedMap by remember {
         mutableStateOf(0)
     }
@@ -50,15 +43,14 @@ if(!(mapsState.mapsInfo.isNullOrEmpty())) {
         Column(
             Modifier
                 .padding(5.dp)
+                .width(110.dp)
                 .clip(RoundedCornerShape(20.dp))
                 .background(RedPrimary),
         ) {
             mapsState.mapsInfo?.forEachIndexed { index, mapItemDTO ->
                 Row(
                     verticalAlignment = Alignment.CenterVertically, modifier = Modifier
-                        .width(100.dp)
-
-                        .fillMaxHeight()
+                        .fillMaxSize()
                         .weight(1f)
                         .background(
                             if (index == selectedMap) {
@@ -74,9 +66,6 @@ if(!(mapsState.mapsInfo.isNullOrEmpty())) {
                             .clickable {
                                 selectedMap = index
                             }
-
-
-                            .weight(1f)
                             .padding(10.dp),
                         fontWeight = FontWeight.Bold,
                         color = Color.White,

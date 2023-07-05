@@ -1,10 +1,14 @@
 package com.example.valorant.ui.weaponDetails_screen
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
@@ -14,6 +18,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.valorant.navigation.Screen
+import com.example.valorant.ui.theme.RedPrimary
 import com.example.valorant.ui.weaponDetails_screen.components.WeaponStatsItem
 
 @Composable
@@ -51,8 +56,11 @@ fun WeaponDetailsScreen(
             WeaponStatsItem(title = "price", value = selectedWeaponDetailsState.selectedWeaponDetails?.shopData?.cost.toString())
         }
 
-        Button(onClick = { navController.navigate(Screen.WeaponSkinsScreen.route + "/${selectedWeaponDetailsState.selectedWeaponDetails?.uuid}") }){
+        Button(modifier = Modifier.align(CenterHorizontally)
+            , onClick = { navController.navigate(Screen.WeaponSkinsScreen.route + "/${selectedWeaponDetailsState.selectedWeaponDetails?.uuid}") }
+        , colors = ButtonDefaults.buttonColors(RedPrimary)){
             Text(text = "Check out the weapon's skins")
+
         }
 
     }

@@ -24,9 +24,6 @@ interface WebServices {
    @GET("sprays")
    suspend fun getSprays() : SpraysResponse
 
-   @GET("playertitles")
-   suspend fun getPlayerTitles() : PlayerTitlesResponse
-
    @GET("playercards")
    suspend fun getPlayerCards() : PlayerCardsResponse
 
