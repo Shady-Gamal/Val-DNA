@@ -25,19 +25,15 @@ fun BundlesScreen(
     Box(modifier = Modifier.fillMaxSize()){
 
         if(!(bundlesState.bundlesInfo.isNullOrEmpty())) {
-            var pageNumb by remember { mutableStateOf(0) }
-            val itemCount = 5
-            val lastPage = (bundlesState.bundlesInfo.size?.div(itemCount))?.minus(1)
             val columnState = rememberLazyListState()
             val coroutineScope = rememberCoroutineScope()
 
-
             LazyColumn(state = columnState,content = {
-                items(if(pageNumb < lastPage!!) itemCount else bundlesState.bundlesInfo.size % itemCount) {
+                items(viewModel.itemCount) {
                     Card(modifier = Modifier.padding(10.dp)) {
 
                         SubcomposeAsyncImage(
-                            model = bundlesState.bundlesInfo.get((it + (pageNumb * itemCount))).displayIcon,
+                            model = bundlesState.bundlesInfo.get(viewModel.getItemByIndex(it)).displayIcon,
                             contentDescription = null,
                             loading ={
                                 Box(modifier = Modifier.fillMaxWidth()
@@ -47,7 +43,7 @@ fun BundlesScreen(
                             }
                         )
                         Text(
-                            text = bundlesState.bundlesInfo.get((it + (pageNumb * itemCount))).displayName
+                            text = bundlesState.bundlesInfo.get(viewModel.getItemByIndex(it)).displayName
                                 ?: "eroreta",Modifier.padding(5.dp)
                         )
                     }
@@ -57,10 +53,10 @@ fun BundlesScreen(
                     Row(horizontalArrangement = Arrangement.SpaceEvenly,
                     modifier = Modifier.fillMaxWidth()) {
 
-
-                        if (pageNumb > 0) {
+                        if (viewModel.pageNumb > 0) {
                             Button(onClick = {
-                                pageNumb--
+                                viewModel.pageNumb--
+                                viewModel.calculateSizeOfPage()
                                 coroutineScope.launch {
                                     columnState.animateScrollToItem(0)
                                 }
@@ -70,9 +66,10 @@ fun BundlesScreen(
                             }
                             )
                         }
-                        if (pageNumb < ((bundlesState.bundlesInfo.size.div(itemCount)) - 1)) {
+                        if (viewModel.pageNumb < viewModel.calculateLastPageIndex()) {
                             Button(onClick = {
-                                pageNumb++
+                               viewModel.pageNumb++
+                                viewModel.calculateSizeOfPage()
                                 coroutineScope.launch {
                                     columnState.animateScrollToItem(0)
                                 }
@@ -80,7 +77,6 @@ fun BundlesScreen(
                                 Text(text = "Next Page")
 
                             }
-
 
                             )
                         }
