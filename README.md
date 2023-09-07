@@ -1,5 +1,5 @@
 # Val-DNA 
-	**VAL-DNA** is an offline first, single source of truth application that consists of 12 screens built entirely with Jetpack compose. The application is an encyclopedia for the game [Valorant](https://playvalorant.com/ar-ae/)
+**VAL-DNA** is an offline first, single source of truth application that consists of 12 screens built entirely with Jetpack compose. The application is an encyclopedia for the game [Valorant](https://playvalorant.com/ar-ae/)
 # Screenshots
 ![Presentation](/Screenshots/Presentation%20Screenshots.png?raw=true "Val-DNA")
 # Features
