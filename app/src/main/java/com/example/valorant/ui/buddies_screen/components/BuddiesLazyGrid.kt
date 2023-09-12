@@ -14,9 +14,12 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.compose.SubcomposeAsyncImage
+import coil.size.Scale
 import com.example.valorant.ui.buddies_screen.BuddiesState
 import com.example.valorant.ui.sprays_screen.SpraysState
 import com.example.valorant.ui.theme.RedPrimary
@@ -29,13 +32,10 @@ fun BuddiesLazyGrid (buddiesState : BuddiesState) {
     Column(modifier = Modifier.fillMaxSize()
     ) {
 
-
-
-
-
         Card(modifier = Modifier
             .padding(20.dp)
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .height(200.dp),
             colors = CardDefaults.cardColors(
                 containerColor = RedPrimary
             )
@@ -46,10 +46,12 @@ fun BuddiesLazyGrid (buddiesState : BuddiesState) {
                 model = buddiesState.buddiesInfo?.get(viewImage)?.displayIcon,
                 contentDescription = null,
                 modifier = Modifier
-                    .size(200.dp)
-                    .fillMaxWidth()
+                    .padding(vertical = 10.dp)
                     .align(Alignment.CenterHorizontally)
-                    .background(color = RedPrimary)
+                    .clip(shape = CircleShape)
+                    .background(color = Color.White)
+                    .aspectRatio(1f)
+                    .fillMaxHeight()
             )
         }
 

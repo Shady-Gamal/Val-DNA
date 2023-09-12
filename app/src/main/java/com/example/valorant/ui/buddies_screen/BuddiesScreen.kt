@@ -22,7 +22,7 @@ fun BuddiesScreen(
     viewModel: BuddiesViewModel = hiltViewModel(),
 ) {
     val buddiesState = viewModel.buddiesState
-        BuddiesLazyGrid(buddiesState = buddiesState)
+    BuddiesLazyGrid(buddiesState = buddiesState)
 
-    Log.e("TAG", buddiesState.buddiesInfo?.size.toString() )
+
 }

@@ -1,5 +1,6 @@
 package com.example.valorant.ui.weaponDetails_screen
 
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 
@@ -12,6 +13,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -54,7 +57,6 @@ fun WeaponDetailsScreen(
             WeaponStatsItem(title = "Magazine Size", value = selectedWeaponDetailsState.selectedWeaponDetails?.weaponStats?.magazineSize.toString())
             WeaponStatsItem(title = "price", value = selectedWeaponDetailsState.selectedWeaponDetails?.shopData?.cost.toString())
         }
-
         Button(modifier = Modifier.align(CenterHorizontally)
             , onClick = { navController.navigate(Screen.WeaponSkinsScreen.route + "/${selectedWeaponDetailsState.selectedWeaponDetails?.uuid}") }
         , colors = ButtonDefaults.buttonColors(RedPrimary)){

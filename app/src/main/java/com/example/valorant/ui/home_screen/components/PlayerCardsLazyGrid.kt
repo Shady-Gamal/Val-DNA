@@ -52,7 +52,7 @@ fun PlayerCardsLazyGrind(
             contentScale = ContentScale.FillHeight,
             loading = {
                 Box(modifier = Modifier.fillMaxSize()) {
-                    CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+                    CircularProgressIndicator(modifier = Modifier.align(Alignment.Center), color = RedPrimary)
                 }
             })
         }

@@ -112,7 +112,7 @@ if(!(mapsState.mapsInfo.isNullOrEmpty())) {
 }
     else if (mapsState.isLoading){
         Box(modifier = Modifier.fillMaxSize()) {
-            CircularProgressIndicator(modifier = Modifier.size(100.dp).align(Center))
+            CircularProgressIndicator(modifier = Modifier.size(100.dp).align(Center), color = RedPrimary)
         }
 
 

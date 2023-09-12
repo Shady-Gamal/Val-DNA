@@ -170,7 +170,7 @@ fun AgentsViewPager(
                     }
                 }else  if (state.isLoading){
                     Box(modifier = Modifier.fillMaxSize()) {
-                        CircularProgressIndicator(modifier = Modifier.align(Center) )
+                        CircularProgressIndicator(modifier = Modifier.align(Center), color = Color.White )
                     }
 
 

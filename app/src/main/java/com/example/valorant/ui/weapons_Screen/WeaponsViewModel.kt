@@ -29,11 +29,15 @@ class WeaponsViewModel @Inject constructor(
 
     fun getWeapons(){
         viewModelScope.launch{
+            weaponState = weaponState.copy(
+                isLoading = true
+            )
             getWeaponsUseCase.invoke().collect{
                 when (it){
 
                     is Resource.Success -> weaponState = weaponState.copy(
                         weaponsInfo = it.data
+                        , isLoading = false
                     )
                     is Resource.Loading -> weaponState = weaponState.copy(
                         isLoading = true
