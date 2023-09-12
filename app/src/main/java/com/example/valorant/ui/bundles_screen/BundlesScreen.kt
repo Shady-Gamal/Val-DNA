@@ -1,9 +1,11 @@
 package com.example.valorant.ui.bundles_screen
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
@@ -14,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.SubcomposeAsyncImage
+import com.example.valorant.ui.theme.RedPrimary
 import kotlinx.coroutines.launch
 
 @Composable
@@ -36,7 +39,8 @@ fun BundlesScreen(
                             model = bundlesState.bundlesInfo.get(viewModel.getItemByIndex(it)).displayIcon,
                             contentDescription = null,
                             loading ={
-                                Box(modifier = Modifier.fillMaxWidth()
+                                Box(modifier = Modifier
+                                    .fillMaxWidth()
                                     .height(200.dp)) {
                                     CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
                                 }
@@ -44,7 +48,7 @@ fun BundlesScreen(
                         )
                         Text(
                             text = bundlesState.bundlesInfo.get(viewModel.getItemByIndex(it)).displayName
-                                ?: "eroreta",Modifier.padding(5.dp)
+                                ?: "error",Modifier.padding(5.dp)
                         )
                     }
                 }
@@ -62,8 +66,8 @@ fun BundlesScreen(
                                 }
                             }, content = {
                                 Text(text = "Previous Page")
-
                             }
+                                ,colors = ButtonDefaults.buttonColors(containerColor = RedPrimary)
                             )
                         }
                         if (viewModel.pageNumb < viewModel.calculateLastPageIndex()) {
@@ -75,8 +79,7 @@ fun BundlesScreen(
                                 }
                             }, content = {
                                 Text(text = "Next Page")
-
-                            }
+                            }, colors = ButtonDefaults.buttonColors(containerColor = RedPrimary)
 
                             )
                         }

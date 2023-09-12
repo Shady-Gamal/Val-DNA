@@ -23,8 +23,9 @@ private val DarkColorScheme = darkColorScheme(
 
 private val LightColorScheme = lightColorScheme(
     primary = RedPrimary,
-    secondary = PurpleGrey40,
-    tertiary = Pink40
+    secondary = RedSecondary,
+    tertiary = Pink40,
+
 
     /* Other default colors to override
     background = Color(0xFFFFFBFE),
@@ -55,8 +56,8 @@ fun ValorantTheme(
     val view = LocalView.current
     if (!view.isInEditMode) {
         SideEffect {
-            (view.context as Activity).window.statusBarColor = colorScheme.primary.toArgb()
-            ViewCompat.getWindowInsetsController(view)?.isAppearanceLightStatusBars = darkTheme
+            (view.context as Activity).window.statusBarColor = RedSecondary.toArgb()
+            ViewCompat.getWindowInsetsController(view)?.isAppearanceLightStatusBars = true
         }
     }
 

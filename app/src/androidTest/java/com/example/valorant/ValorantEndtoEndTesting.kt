@@ -27,7 +27,7 @@ import com.example.valorant.main_activity.components.AppBar
 import com.example.valorant.main_activity.components.navigationList
 import com.example.valorant.navigation.Navigation
 import com.example.valorant.navigation.Screen
-import com.example.valorant.ui.theme.BackGround
+import com.example.valorant.ui.theme.RedSecondary
 import com.example.valorant.ui.theme.ValorantTheme
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
@@ -129,7 +129,7 @@ class ValorantEndtoEndTesting {
                                             PaddingValues(0.dp)
                                         }
                                     )
-                                    .background(BackGround)){
+                                    .background(RedSecondary)){
                                     Navigation(navController = navController)
 
                                 }

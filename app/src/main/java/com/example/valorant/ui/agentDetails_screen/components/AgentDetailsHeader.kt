@@ -27,37 +27,38 @@ modifier: Modifier = Modifier.height(300.dp)) {
 
     if (!(agentDetailsState.selectedAgentDetails?.background.isNullOrEmpty()))
         {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(300.dp)
-                    .background(
-                        brush = Brush.horizontalGradient(
-                            colors = listOf(
-                                Color(
-                                    android.graphics.Color.parseColor(
-                                        "#" + agentDetailsState.selectedAgentDetails?.backgroundGradientColors
-                                            ?.get(0)
-                                            ?.substring(0, 6)
-                                    )
-                                ),
-                                Color(
-                                    android.graphics.Color.parseColor(
-                                        "#" + agentDetailsState.selectedAgentDetails?.backgroundGradientColors
-                                            ?.get(1)
-                                            ?.substring(0, 6)
-                                    )
-                                )
-                            ),
+        Column(modifier = Modifier
+            .fillMaxWidth()
+            .height(300.dp)
+            .background(
+                brush = Brush.horizontalGradient(
+                    colors = listOf(
+                        Color(
+                            android.graphics.Color.parseColor(
+                                "#" + agentDetailsState.selectedAgentDetails?.backgroundGradientColors
+                                    ?.get(0)
+                                    ?.substring(0, 6)
+                            )
                         ),
-                    )
-
-            ) {
+                        Color(
+                            android.graphics.Color.parseColor(
+                                "#" + agentDetailsState.selectedAgentDetails?.backgroundGradientColors
+                                    ?.get(1)
+                                    ?.substring(0, 6)
+                            )
+                        )
+                    ),
+                ),
+            )) {
+            Spacer(modifier=Modifier.height(WindowInsets.statusBars.asPaddingValues().calculateTopPadding()))
+            Row{
                 Column(
                     verticalArrangement = Arrangement.Center,
-                    modifier = Modifier.fillMaxHeight()
+                    modifier = Modifier
+                        .fillMaxHeight()
                         .padding(10.dp)
                 ) {
+                    Spacer(modifier = Modifier.size(WindowInsets.statusBars.asPaddingValues().calculateTopPadding()))
                     Text(
                         text = agentDetailsState.selectedAgentDetails?.displayName ?: "error",
                         fontSize = 40.sp,
@@ -67,10 +68,11 @@ modifier: Modifier = Modifier.height(300.dp)) {
                     Text(
                         text = agentDetailsState.selectedAgentDetails?.role?.displayName ?: "error",
                         fontSize = 35.sp,
-                        modifier = Modifier.
-                        clip(RoundedCornerShape(10.dp))
-                        .background(Color.Gray.copy(alpha = .5f)).padding(15.dp)
-                            ,
+                        modifier = Modifier
+                            .clip(RoundedCornerShape(10.dp))
+                            .background(Color.Gray.copy(alpha = .5f))
+                            .padding(15.dp)
+                        ,
                         color = Color.White,
                     )
                 }
@@ -80,7 +82,7 @@ modifier: Modifier = Modifier.height(300.dp)) {
                         contentDescription = null,
                         modifier = Modifier
 
-                            .offset( x = 30.dp)
+                            .offset(x = 30.dp)
                             .heightIn(max = 300.dp)
                             .wrapContentSize(),
                         contentScale = ContentScale.Crop
@@ -100,5 +102,8 @@ modifier: Modifier = Modifier.height(300.dp)) {
                 }
 
             }
+
+        }
+
 
 }}

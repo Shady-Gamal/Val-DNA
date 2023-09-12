@@ -11,7 +11,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.valorant.navigation.Screen
 import com.example.valorant.ui.home_screen.components.*
-import com.example.valorant.ui.theme.BackGround
+import com.example.valorant.ui.theme.RedSecondary
 
 
 @Composable
@@ -23,7 +23,7 @@ fun HomeScreen(
     val state = viewModel.Homestate
     Column(modifier = Modifier
         .verticalScroll(rememberScrollState())
-        .background(BackGround)
+        .background(RedSecondary)
         .testTag("test_tag_home_screen")) {
         AgentsViewPager(state = state, onItemClick = {
             navController.navigate(Screen.AgentScreen.route)

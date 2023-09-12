@@ -30,6 +30,7 @@ fun WeaponDetailsScreen(
     val selectedWeaponDetailsState = viewModel.weaponDetailsState
 
     Column(modifier = Modifier.fillMaxSize()) {
+        Spacer(modifier = Modifier.size(WindowInsets.statusBars.asPaddingValues().calculateTopPadding()))
 
         Card(modifier = Modifier
             .align(CenterHorizontally)
@@ -45,8 +46,6 @@ fun WeaponDetailsScreen(
                         , modifier = Modifier.fillMaxSize()
 
                 )
-
-
             }
         }
         Row(horizontalArrangement = Arrangement.SpaceEvenly) {

@@ -22,23 +22,27 @@ fun WeaponSkinsScreen(
 
     val weaponSkinsState = viewModel.weaponSkinsState
 
-    LazyColumn(modifier = Modifier.fillMaxSize(), content ={
+    Column {
+        Spacer(modifier = Modifier.size(WindowInsets.statusBars.asPaddingValues().calculateTopPadding()))
+        LazyColumn(modifier = Modifier.fillMaxSize(), content ={
 
-        items(weaponSkinsState.WeaponSkins?.skins?.size ?: 0){
+            items(weaponSkinsState.WeaponSkins?.skins?.size ?: 0){
 
-            Card(modifier = Modifier.padding(10.dp)) {
+                Card(modifier = Modifier.padding(10.dp)) {
 
-            SubcomposeAsyncImage(model = weaponSkinsState.WeaponSkins?.skins?.get(it)?.displayIcon, contentDescription = null,
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(150.dp),loading = {
-                    Box(modifier = Modifier.fillMaxSize()) {
-                        CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
-                    }
-                }
+                    SubcomposeAsyncImage(model = weaponSkinsState.WeaponSkins?.skins?.get(it)?.displayIcon, contentDescription = null,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(150.dp),loading = {
+                            Box(modifier = Modifier.fillMaxSize()) {
+                                CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+                            }
+                        }
 
-            )
-            }}
-    } )
+                    )
+                }}
+        } )
+    }
+
 
 }

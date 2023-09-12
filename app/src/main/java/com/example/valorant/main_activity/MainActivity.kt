@@ -1,5 +1,8 @@
 package com.example.valorant.main_activity
+
+import android.os.Build
 import android.os.Bundle
+import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -20,15 +23,16 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.valorant.*
+import com.example.valorant.R
 import com.example.valorant.main_activity.components.AppBar
+import com.example.valorant.main_activity.components.navigationList
 import com.example.valorant.navigation.Navigation
 import com.example.valorant.navigation.Screen
-import com.example.valorant.R
-import com.example.valorant.main_activity.components.navigationList
-import com.example.valorant.ui.theme.BackGround
+import com.example.valorant.ui.theme.RedSecondary
 import com.example.valorant.ui.theme.ValorantTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -36,6 +40,14 @@ class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            val w = window
+            w.setFlags(
+                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+            )
+        }
 installSplashScreen().apply {
     this.setKeepOnScreenCondition{
         viewModel.isLoading.value
@@ -47,9 +59,6 @@ installSplashScreen().apply {
                 val navController = rememberNavController()
                 val drawerState = rememberDrawerState(DrawerValue.Closed)
                 val scope = rememberCoroutineScope()
-
-
-
 
 
                 val navBackStackEntry by navController.currentBackStackEntryAsState()
@@ -108,29 +117,25 @@ installSplashScreen().apply {
                                         AppBar(onNavigationIconClick = {
                                             scope.launch { drawerState.apply { if (drawerState.isClosed) open() else close() } }
 
-                                        })
+                                        }
+                                        )
                                     }
                                 )
-
-
-                        }, content = {
+                                     }, content = {
                             Box(modifier = Modifier
                                 .padding(
-                                    if (topBarState.value) it else {PaddingValues(0.dp)}
+                                    if (topBarState.value) it else {
+                                        PaddingValues(0.dp)
+                                    }
                                 )
-                                .background(BackGround)){
+                                .background(RedSecondary)){
                             Navigation(navController = navController)
 
                             }
-                        })
-
-
-
-                    }
+                        }
+                        )
+                }
                 )
-
-
-
             }
         }
     }
