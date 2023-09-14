@@ -1,6 +1,5 @@
 package com.example.valorant.main_activity
 
-import android.os.Build
 import android.os.Bundle
 import android.view.WindowManager
 import androidx.activity.ComponentActivity
@@ -25,6 +24,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.valorant.*
 import com.example.valorant.R
 import com.example.valorant.main_activity.components.AppBar
+import com.example.valorant.main_activity.components.BottomNavigationBar
 import com.example.valorant.main_activity.components.navigationList
 import com.example.valorant.navigation.Navigation
 import com.example.valorant.navigation.Screen
@@ -37,18 +37,14 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     val viewModel : MainViewModel by viewModels()
-    @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            val w = window
-            w.setFlags(
-                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
-                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
-            )
-        }
-installSplashScreen().apply {
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+        )
+        installSplashScreen().apply {
     this.setKeepOnScreenCondition{
         viewModel.isLoading.value
     }
@@ -82,7 +78,6 @@ installSplashScreen().apply {
                     }
                     else -> topBarState.value = true
                 }
-
 
 
                 ModalNavigationDrawer(
@@ -121,11 +116,14 @@ installSplashScreen().apply {
                                         )
                                     }
                                 )
-                                     }, content = {
+                                     }, bottomBar = {
+                                BottomNavigationBar(navController = navController)
+                            }
+                            , content = {
                             Box(modifier = Modifier
                                 .padding(
                                     if (topBarState.value) it else {
-                                        PaddingValues(0.dp)
+                                        PaddingValues()
                                     }
                                 )
                                 .background(RedSecondary)){

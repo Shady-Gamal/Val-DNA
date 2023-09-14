@@ -26,11 +26,15 @@ class BuddiesViewModel @Inject constructor(
     fun getBuddies(){
 
         viewModelScope.launch {
+            buddiesState = buddiesState.copy(
+                isLoading = true
+            )
             getBuddiesUseCase.invoke().collect() {
 
                 when (it) {
                     is Resource.Success -> buddiesState = buddiesState.copy(
-                        buddiesInfo = it.data
+                        buddiesInfo = it.data,
+                        isLoading = false
                     )
                     is Resource.Error -> buddiesState = buddiesState.copy(
                         error = it.message

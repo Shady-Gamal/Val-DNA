@@ -30,7 +30,6 @@ fun AgentsInfoScreen(
 
     Column {
 
-
         AgentDetailsHeader(agentDetailsState = selectedAgentState)
         AgentDetailsBody(agentDetailsState = selectedAgentState)
     }

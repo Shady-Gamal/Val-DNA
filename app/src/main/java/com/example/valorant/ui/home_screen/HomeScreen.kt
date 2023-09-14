@@ -20,7 +20,7 @@ fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel()
     ) {
 
-    val state = viewModel.Homestate
+    val state = viewModel.homeState
     Column(modifier = Modifier
         .verticalScroll(rememberScrollState())
         .background(RedSecondary)

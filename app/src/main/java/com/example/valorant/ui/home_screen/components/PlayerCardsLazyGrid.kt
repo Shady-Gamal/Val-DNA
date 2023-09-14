@@ -29,7 +29,7 @@ fun PlayerCardsLazyGrind(
 
     Column(modifier = Modifier.padding(10.dp)) {
 
-        Text(text = "PlayerCards", fontSize = 25.sp,
+        Text(text = "Player Cards", fontSize = 25.sp,
             color = RedPrimary,
             fontWeight = FontWeight.Bold
             , modifier = Modifier.padding(bottom = 5.dp))
@@ -39,11 +39,10 @@ fun PlayerCardsLazyGrind(
 
         items(homeState.playerCardsInfo?.size ?: 0){
 
-
             SubcomposeAsyncImage(model = homeState.playerCardsInfo?.get(it)?.wideArt, contentDescription = null,
             modifier = Modifier
                 .padding(end = 10.dp, bottom = 10.dp)
-                .clip(shape = CircleShape)
+                .clip(RoundedCornerShape(10.dp))
                 .width(200.dp)
                 .clickable {
                     onItemClick()
@@ -52,10 +51,12 @@ fun PlayerCardsLazyGrind(
             contentScale = ContentScale.FillHeight,
             loading = {
                 Box(modifier = Modifier.fillMaxSize()) {
-                    CircularProgressIndicator(modifier = Modifier.align(Alignment.Center), color = RedPrimary)
+                    CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
                 }
             })
         }
+
+
     } )}
 
 }

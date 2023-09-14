@@ -3,8 +3,13 @@ package com.example.valorant.ui.agentDetails_screen.components
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.Orientation
+import androidx.compose.foundation.gestures.scrollable
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
@@ -18,6 +23,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.SubcomposeAsyncImage
+import com.example.valorant.Constants
 import com.example.valorant.R
 import com.example.valorant.ui.agentDetails_screen.AgentDetailsState
 import com.example.valorant.ui.theme.RedPrimary
@@ -105,8 +111,10 @@ fun AgentDetailsBody(agentDetailsState: AgentDetailsState) {
                 }
                 Column(modifier = Modifier
                     .padding(10.dp)
+                    .padding(bottom = Constants.Bottom_Nav_Bar_Height)
                     .clip(RoundedCornerShape(20.dp))
                     .background(Color.Black.copy(alpha = .5f))
+                    .verticalScroll(rememberScrollState())
 
                     .padding(10.dp)
                     ) {
@@ -119,7 +127,8 @@ fun AgentDetailsBody(agentDetailsState: AgentDetailsState) {
                     Text(
                         text = agentDetailsState.selectedAgentDetails?.abilities?.get(selectedOption)?.description
                             ?: "nullnolla",
-                        color = Color.White
+                        color = Color.White,
+
                     )
                 }
             }

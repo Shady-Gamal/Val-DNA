@@ -17,18 +17,22 @@ import javax.inject.Inject
 class SpraysViewModel @Inject constructor(
     val getSpraysUSeCase: GetSpraysUSeCase,
 ) : ViewModel() {
-
+    var spraysState by mutableStateOf(SpraysState())
     init {
         getSprays()
     }
-var spraysState by mutableStateOf(SpraysState())
+
     fun getSprays(){
 
         viewModelScope.launch {
+            spraysState = spraysState.copy(
+                isLoading = true
+            )
             getSpraysUSeCase.invoke().collect{
                 when (it){
                     is Resource.Success -> spraysState = spraysState.copy(
-                        spraysInfo = it.data
+                        spraysInfo = it.data,
+                        isLoading = false
                     )
                     is Resource.Error ->  spraysState = spraysState.copy(
                         error = it.message

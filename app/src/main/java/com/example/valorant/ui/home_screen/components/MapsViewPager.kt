@@ -96,7 +96,7 @@ fun MapsViewPager(
                             )
                             Text(
                                 text = state.mapsInfo?.get(page)?.displayName ?: "Error",
-                                fontSize = 40.sp,
+                                fontSize = 30.sp,
                                 color = Color.White,
                                 modifier = Modifier
                                     .padding(7.dp)

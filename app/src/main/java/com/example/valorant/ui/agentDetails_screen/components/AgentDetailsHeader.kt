@@ -1,7 +1,9 @@
 package com.example.valorant.ui.agentDetails_screen.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
@@ -29,7 +31,7 @@ modifier: Modifier = Modifier.height(300.dp)) {
         {
         Column(modifier = Modifier
             .fillMaxWidth()
-            .height(300.dp)
+            .height(500.dp)
             .background(
                 brush = Brush.horizontalGradient(
                     colors = listOf(
@@ -71,8 +73,7 @@ modifier: Modifier = Modifier.height(300.dp)) {
                         modifier = Modifier
                             .clip(RoundedCornerShape(10.dp))
                             .background(Color.Gray.copy(alpha = .5f))
-                            .padding(15.dp)
-                        ,
+                            .padding(15.dp),
                         color = Color.White,
                     )
                 }
@@ -83,7 +84,7 @@ modifier: Modifier = Modifier.height(300.dp)) {
                         modifier = Modifier
 
                             .offset(x = 30.dp)
-                            .heightIn(max = 300.dp)
+                            .heightIn(max = 500.dp)
                             .wrapContentSize(),
                         contentScale = ContentScale.Crop
                     )
@@ -93,7 +94,7 @@ modifier: Modifier = Modifier.height(300.dp)) {
                         modifier = Modifier
 
                             .offset(y = 50.dp, x = 50.dp)
-                            .heightIn(max = 300.dp)
+                            .heightIn(max = 500.dp)
                             .scale(1.5f)
                             .wrapContentSize(),
                         contentScale = ContentScale.Crop

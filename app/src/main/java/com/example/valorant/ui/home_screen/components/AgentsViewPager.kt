@@ -34,6 +34,7 @@ import coil.compose.SubcomposeAsyncImage
 import com.example.valorant.R
 import com.example.valorant.ui.home_screen.HomeState
 import com.example.valorant.ui.theme.RedPrimary
+import com.example.valorant.ui.theme.RedSecondary
 import com.example.valorant.ui.theme.WhiteForBodyText
 import com.example.valorant.ui.theme.WhiteForTitleText
 import kotlinx.coroutines.delay
@@ -115,7 +116,7 @@ fun AgentsViewPager(
                                 text = (state.agentsInfo?.get(shownAgent)?.description?.substring(
                                     0,
                                     50
-                                ) + "...") ?: "oopsie",
+                                ) + "...") ,
                                 color = WhiteForBodyText,
                                 fontSize = 15.sp
                             )
@@ -131,7 +132,7 @@ fun AgentsViewPager(
                                 .weight(1f)
                         )
                         {
-                            AsyncImage(
+                            SubcomposeAsyncImage(
                                 model = state.agentsInfo?.get(shownAgent)?.background,
                                 contentDescription = null,
                                 modifier = Modifier
@@ -142,6 +143,13 @@ fun AgentsViewPager(
                                     .fillMaxSize()
                                     .scale(1f, 1.5f),
                                 contentScale = ContentScale.FillBounds,
+                                loading = {
+                                    Box(modifier = Modifier
+                                        .fillMaxSize()
+                                      ){
+                                        CircularProgressIndicator(modifier = Modifier.align(Center), color = Color.White)
+                                    }
+                                }
 
 
 
@@ -160,7 +168,7 @@ fun AgentsViewPager(
                                     Box(modifier = Modifier
                                         .fillMaxSize()
                                         .offset(0.dp, (-30).dp),){
-                                        CircularProgressIndicator(modifier = Modifier.align(Center))
+                                        CircularProgressIndicator(modifier = Modifier.align(Center), color = RedPrimary)
                                     }
                                 }
                             )

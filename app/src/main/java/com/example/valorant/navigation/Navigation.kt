@@ -28,6 +28,7 @@ fun Navigation(navController: NavHostController) {
         composable(route = Screen.HomeScreen.route){
 
             HomeScreen(navController = navController)
+
         }
         composable(route = Screen.AgentScreen.route){
 
