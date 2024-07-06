@@ -11,13 +11,13 @@ interface BuddiesRepository {
 }
 interface BuddiesOnlineDataSource{
 
-    suspend fun getBuddies()
+     suspend fun getBuddies()
 
 }
 
 interface BuddiesOfflineDataSource{
 
-    suspend fun getBuddies() : Flow<Resource<List<BuddyItemDTO>>>
+     fun getBuddies() : Flow<Resource<List<BuddyItemDTO>>>
 
 
 }

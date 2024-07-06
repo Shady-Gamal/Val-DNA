@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 class BundlesOfflineDataSourceImpl @Inject constructor(val valorantDatabase: ValorantDatabase) :
     BundlesOfflineDataSource {
-    override suspend fun getBundles(): Flow<Resource<List<BundleItemDTO>>> {
+    override fun getBundles(): Flow<Resource<List<BundleItemDTO>>> {
 
         return flow<Resource<List<BundleItemDTO>>> {
             emit( Resource.Success(valorantDatabase.getBundlesDao().getBundles().map{

@@ -11,6 +11,7 @@ data class MapItemDTO(
 
     val displayName: String? = null,
 
+    val tacticalDescription: String? = null,
 
     val listViewIcon: String? = null,
 
@@ -26,6 +27,7 @@ data class MapItemDTO(
 
     val uuid: String? = null,
 
+    val narrativeDescription: String? = null,
 
     val displayIcon: String? = null,
 

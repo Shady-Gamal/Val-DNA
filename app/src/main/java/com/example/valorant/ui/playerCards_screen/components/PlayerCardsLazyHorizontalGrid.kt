@@ -1,5 +1,6 @@
 package com.example.valorant.ui.playerCards_screen.components
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -27,14 +28,13 @@ fun PlayerCardsLazyHorizontalGrid(playerCardsState : PlayerCardsState)
     LazyHorizontalGrid(rows = GridCells.Fixed(3), modifier = Modifier.fillMaxSize() , content = {
 
         items(playerCardsState.playerCardsInfo?.size ?:0){
-            Box (){
+            Box (modifier = Modifier
+                .padding(10.dp)
+                .clip(RoundedCornerShape(20.dp))
+                .border(BorderStroke(width = 6.dp, color = RedPrimary))){
 
             AsyncImage(model = playerCardsState.playerCardsInfo?.get(it)?.largeArt, contentDescription = null,
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(10.dp)
-                    .clip(RoundedCornerShape(20.dp))
-                    .border(width = 4.dp, color = RedPrimary), contentScale = ContentScale.FillHeight)
+                 contentScale = ContentScale.Crop)
 
 
             }

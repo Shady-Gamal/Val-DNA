@@ -12,6 +12,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
@@ -25,6 +27,12 @@ fun BundlesScreen(
     viewModel: BundlesViewModel = hiltViewModel()
 ) {
     val bundlesState = viewModel.bundlesState
+
+    val gradientBrush = Brush.horizontalGradient(
+        colors = listOf(Color.Black, Color.Transparent),
+        startX = 300f,
+        endX = 450f
+    )
     Box(modifier = Modifier.fillMaxSize()){
 
         if(!(bundlesState.bundlesInfo.isNullOrEmpty())) {
@@ -34,22 +42,36 @@ fun BundlesScreen(
             LazyColumn(state = columnState,content = {
                 items(viewModel.itemCount) {
                     Card(modifier = Modifier.padding(10.dp)) {
+                        Box(Modifier.fillMaxSize()) {
 
-                        SubcomposeAsyncImage(
-                            model = bundlesState.bundlesInfo.get(viewModel.getItemByIndex(it)).displayIcon,
-                            contentDescription = null,
-                            loading ={
-                                Box(modifier = Modifier
-                                    .fillMaxWidth()
-                                    .height(200.dp)) {
-                                    CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+
+                            SubcomposeAsyncImage(
+                                model = bundlesState.bundlesInfo.get(viewModel.getItemByIndex(it)).displayIcon,
+                                contentDescription = null,
+                                loading = {
+                                    Box(
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .height(200.dp)
+                                    ) {
+                                        CircularProgressIndicator(
+                                            modifier = Modifier.align(
+                                                Alignment.Center
+                                            )
+                                        )
+                                    }
                                 }
-                            }
-                        )
-                        Text(
-                            text = bundlesState.bundlesInfo.get(viewModel.getItemByIndex(it)).displayName
-                                ?: "error",Modifier.padding(5.dp)
-                        )
+                            )
+                            Text(
+                                text = bundlesState.bundlesInfo.get(viewModel.getItemByIndex(it)).displayName
+                                    ?: "error", Modifier
+                                    .align(Alignment.BottomStart)
+                                    .fillMaxWidth()
+                                    .background(brush = gradientBrush)
+                                    .padding(8.dp),
+                                color = Color.White)
+
+                        }
                     }
                 }
                 item {

@@ -8,7 +8,7 @@ import com.example.data.model.*
 
 @Database(entities = [AgentsDataItem::class, WeaponsDataItem::class, BundlesDataItem::class,
  BuddiesDataItem::class, PlayerCardsDataItem::class, MapsDataItem::class, SpraysDataItem::class],
- version = 7)
+ version = 8)
 @TypeConverters(Converters::class)
 abstract class ValorantDatabase : RoomDatabase() {
 

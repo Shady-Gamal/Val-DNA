@@ -51,7 +51,8 @@ modifier: Modifier = Modifier.height(300.dp)) {
                         )
                     ),
                 ),
-            )) {
+            )
+            .background(Color.Black.copy(alpha = .5f))) {
             Spacer(modifier=Modifier.height(WindowInsets.statusBars.asPaddingValues().calculateTopPadding()))
             Row{
                 Column(
@@ -59,8 +60,8 @@ modifier: Modifier = Modifier.height(300.dp)) {
                     modifier = Modifier
                         .fillMaxHeight()
                         .padding(10.dp)
+                        .weight(1f)
                 ) {
-                    Spacer(modifier = Modifier.size(WindowInsets.statusBars.asPaddingValues().calculateTopPadding()))
                     Text(
                         text = agentDetailsState.selectedAgentDetails?.displayName ?: "error",
                         fontSize = 40.sp,
@@ -69,15 +70,22 @@ modifier: Modifier = Modifier.height(300.dp)) {
                     )
                     Text(
                         text = agentDetailsState.selectedAgentDetails?.role?.displayName ?: "error",
-                        fontSize = 35.sp,
-                        modifier = Modifier
-                            .clip(RoundedCornerShape(10.dp))
-                            .background(Color.Gray.copy(alpha = .5f))
-                            .padding(15.dp),
+                        fontSize = 20.sp,
+                        modifier = Modifier,
                         color = Color.White,
                     )
+                    Text(text = agentDetailsState.selectedAgentDetails?.description ?: "error",
+                        color = Color.White,
+                        modifier = Modifier
+                            .padding(vertical = 5.dp)
+                            .clip(RoundedCornerShape(10.dp))
+                            .background(Color.Black.copy(alpha = .5f))
+                            .padding(8.dp),
+                        )
                 }
-                Box(modifier = Modifier.clip(RoundedCornerShape(0.dp))) {
+                Box(modifier = Modifier
+                    .clip(RoundedCornerShape(0.dp))
+                    .weight(1f)) {
                     AsyncImage(
                         model = agentDetailsState.selectedAgentDetails?.background,
                         contentDescription = null,

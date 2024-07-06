@@ -3,7 +3,9 @@ package com.example.valorant.ui.home_screen.components
 
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.pager.HorizontalPager
@@ -16,18 +18,25 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Alignment.Companion.Bottom
 import androidx.compose.ui.Alignment.Companion.BottomCenter
 import androidx.compose.ui.Alignment.Companion.Center
+import androidx.compose.ui.Alignment.Companion.CenterHorizontally
+import androidx.compose.ui.Alignment.Companion.Start
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.*
-import androidx.compose.ui.graphics.R
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import coil.compose.SubcomposeAsyncImage
+import com.example.valorant.R
 import com.example.valorant.ui.home_screen.HomeState
 import com.example.valorant.ui.theme.PinkForLazyRows
 import com.example.valorant.ui.theme.RedPrimary
@@ -42,7 +51,13 @@ fun MapsViewPager(
     onItemClick : () -> Unit
 ) {
     Column(modifier = Modifier.padding(10.dp)) {
-
+        val pageCount = state.mapsInfo?.size ?: 1
+        val pagerState = rememberPagerState(
+            initialPage = 0,
+            initialPageOffsetFraction = 0f
+        ) {
+            pageCount
+        }
         Text(
             text = "Maps", fontSize = 25.sp,
             color = RedPrimary,
@@ -52,18 +67,12 @@ fun MapsViewPager(
         Card(
             shape = RoundedCornerShape(10.dp),
         ) {
-            Box(modifier = Modifier
+            Column(modifier = Modifier
                 .background(color = PinkForLazyRows)
                 .clickable {
                     onItemClick()
                 }) {
-                val pageCount = state.mapsInfo?.size ?: 1
-                val pagerState = rememberPagerState(
-                    initialPage = 0,
-                    initialPageOffsetFraction = 0f
-                ) {
-                    pageCount
-                }
+
                 LaunchedEffect(Unit) {
                     while (true) {
                         yield()
@@ -81,6 +90,12 @@ fun MapsViewPager(
                         .height(185.dp)
                 ) { page ->
                     Box {
+                        val gradientBrush = Brush.horizontalGradient(
+                            colors = listOf(Color.Black.copy(.7f), Color.Transparent),
+                            startX = 300f, endX = 600f
+
+                        )
+
                         if (!(state.mapsInfo.isNullOrEmpty())) {
 
                             SubcomposeAsyncImage(
@@ -94,18 +109,42 @@ fun MapsViewPager(
                                     }
                                 }
                             )
-                            Text(
-                                text = state.mapsInfo?.get(page)?.displayName ?: "Error",
-                                fontSize = 30.sp,
-                                color = Color.White,
+                            Column(
                                 modifier = Modifier
-                                    .padding(7.dp)
-                                    .background(
-                                        Color.Black.copy(.5f),
-                                        shape = CircleShape
-                                    )
+                                    .background(brush = gradientBrush)
+                                    .fillMaxWidth(0.5f)
+                                    .fillMaxHeight()
                                     .padding(10.dp)
-                            )
+
+                                    ,
+
+
+                            ) {
+
+
+                                    Text(
+                                        text = state.mapsInfo?.get(page)?.displayName ?: "error",
+                                        color = Color.White, fontSize = 22.sp, fontWeight = FontWeight.Bold
+                                    )
+                                    Text(
+                                        text = state.mapsInfo?.get(page)?.narrativeDescription
+                                            ?: "Description isn't available yet",
+                                        fontSize = 17.sp,
+                                        color = Color.White,
+                                        modifier = Modifier.weight(.7f)
+                                        , overflow = TextOverflow.Ellipsis
+
+
+                                    )
+
+                                Image(
+                                    painter = painterResource(id = R.drawable.learnmore_viewpager),
+                                    contentDescription = "learn more",
+                                    contentScale = ContentScale.None,
+                                    modifier = Modifier.padding(10.dp)
+
+                                )
+                            }
                         } else if (state.isLoading) {
                             Box(modifier = Modifier.fillMaxSize()) {
                                 CircularProgressIndicator(modifier = Modifier.align(Center))
@@ -113,28 +152,34 @@ fun MapsViewPager(
                         }
                     }
                 }
-                Row(
-                    Modifier
-                        .fillMaxWidth()
-                        .align(alignment = BottomCenter),
-                    verticalAlignment = Alignment.Bottom,
-                    horizontalArrangement = Arrangement.Center
-                ) {
-                    repeat(pageCount) { iteration ->
-                        val color =
-                            if (pagerState.currentPage == iteration) Color.White else Color.Red
-                        Box(
-                            modifier = Modifier
-                                .padding(2.dp)
-                                .clip(CircleShape)
-                                .background(color)
-                                .size(10.dp)
-                        )
-                    }
-                }
+
             }
 
+
         }
+
+
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .align(CenterHorizontally)
+            ,
+            verticalAlignment = Alignment.Bottom,
+            horizontalArrangement = Arrangement.Center
+        ) {
+            repeat(pageCount) { iteration ->
+                val color =
+                    if (pagerState.currentPage == iteration)  Color.Red else  Color.White
+                Box(
+                    modifier = Modifier
+                        .padding(2.dp)
+                        .clip(CircleShape)
+                        .background(color)
+                        .size(10.dp)
+                )
+            }
+        }
+
 
     }
 }

@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
+import coil.compose.SubcomposeAsyncImage
 import com.example.valorant.ui.theme.RedPrimary
 
 @Composable
@@ -38,7 +39,6 @@ fun MapsScreen(
 
 if(!(mapsState.mapsInfo.isNullOrEmpty())) {
     Row(Modifier.fillMaxSize()) {
-
 
         Column(
             Modifier
@@ -90,13 +90,24 @@ if(!(mapsState.mapsInfo.isNullOrEmpty())) {
                 modifier = Modifier.align(CenterHorizontally)
             )
 
-            AsyncImage(
+            SubcomposeAsyncImage(
                 model = mapsState.mapsInfo?.get(selectedMap)?.splash, contentDescription = null,
                 modifier = Modifier.clip(RoundedCornerShape(10.dp))
+                , loading = {
+                    Box(Modifier.size(200.dp)) {
+                        CircularProgressIndicator(color = RedPrimary, modifier = Modifier.align(Center))
+                    }
+                }
             )
 
             Spacer(modifier = Modifier.height(20.dp))
 
+            Text(text = "Descreption", fontSize = 20.sp, color = RedPrimary)
+
+            Text(text = mapsState.mapsInfo.get(selectedMap).narrativeDescription ?: "Description isn't yet available",
+                color = RedPrimary)
+
+            Spacer(modifier = Modifier.height(20.dp))
 
             Text(text = "Mini-Map View", fontSize = 20.sp, color = RedPrimary)
             AsyncImage(
@@ -112,7 +123,9 @@ if(!(mapsState.mapsInfo.isNullOrEmpty())) {
 }
     else if (mapsState.isLoading){
         Box(modifier = Modifier.fillMaxSize()) {
-            CircularProgressIndicator(modifier = Modifier.size(100.dp).align(Center), color = RedPrimary)
+            CircularProgressIndicator(modifier = Modifier
+                .size(100.dp)
+                .align(Center), color = RedPrimary)
         }
 
 

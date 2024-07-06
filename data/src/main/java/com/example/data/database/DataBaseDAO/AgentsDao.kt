@@ -16,7 +16,7 @@ interface AgentsDao {
  suspend fun getAgents() : List<AgentsDataItem>
 
  @Insert(onConflict = OnConflictStrategy.REPLACE)
- suspend fun saveAgents(Agents : List<AgentsDataItem>)
+ suspend fun saveAgents(agents : List<AgentsDataItem>)
 
 
    @Query("Select * from AgentsDataITem Where uuid = :agentUUID ")

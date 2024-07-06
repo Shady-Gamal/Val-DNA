@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface BundlesRepository {
 
-    suspend fun getBundles() : Flow<Resource<List<BundleItemDTO>>>
+     suspend fun getBundles() : Flow<Resource<List<BundleItemDTO>>>
 
 }
 interface BundlesOnlineDataSource{
@@ -18,7 +18,7 @@ interface BundlesOnlineDataSource{
 
 interface BundlesOfflineDataSource{
 
-    suspend fun getBundles() : Flow<Resource<List<BundleItemDTO>>>
+     fun getBundles() : Flow<Resource<List<BundleItemDTO>>>
 
 
 }

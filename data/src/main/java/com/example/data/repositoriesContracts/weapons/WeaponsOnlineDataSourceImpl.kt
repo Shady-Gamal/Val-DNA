@@ -30,7 +30,7 @@ class WeaponsOnlineDataSourceImpl @Inject constructor(
         }
         catch (ex : Exception){
 
-            Toast.makeText(context,"something is wrong with the server", Toast.LENGTH_LONG  ).show()
+            Toast.makeText(context,ex.message, Toast.LENGTH_LONG  ).show()
         }
 
     }

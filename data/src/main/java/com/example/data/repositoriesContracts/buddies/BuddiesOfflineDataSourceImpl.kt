@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 
 class BuddiesOfflineDataSourceImpl @Inject constructor(val valorantDatabase: ValorantDatabase) : BuddiesOfflineDataSource {
-    override suspend fun getBuddies(): Flow<Resource<List<BuddyItemDTO>>> {
+    override fun getBuddies(): Flow<Resource<List<BuddyItemDTO>>> {
 
         return flow<Resource<List<BuddyItemDTO>>> {
             emit(

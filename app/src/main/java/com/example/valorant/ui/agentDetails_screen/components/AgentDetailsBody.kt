@@ -63,6 +63,7 @@ fun AgentDetailsBody(agentDetailsState: AgentDetailsState) {
                         ),
                     )
                     .fillMaxSize()
+                    .background(Color.Black.copy(alpha = .5f))
 
             ) {
 

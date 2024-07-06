@@ -66,7 +66,7 @@ class Converters(val jsonParser: JsonParser) {
     }
 
     @TypeConverter
-    fun toVoiceLineJson(meanings: VoiceLine): String {
+    fun toVoiceLineJson(meanings: VoiceLine?): String {
         return jsonParser.toJson(
             meanings,
             object : TypeToken<VoiceLine>(){}.type

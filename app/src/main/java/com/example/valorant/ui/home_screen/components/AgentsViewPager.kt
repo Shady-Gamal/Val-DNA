@@ -55,8 +55,7 @@ fun AgentsViewPager(
     ) {
 
 
-        Box(modifier = Modifier
-            .background(color = RedPrimary)
+        Box(modifier = Modifier.background(color = RedPrimary)
             .clickable {
                 onItemClick()
             }) {

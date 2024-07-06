@@ -1,6 +1,7 @@
 package com.example.valorant.ui.home_screen
 
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -33,7 +34,6 @@ class HomeViewModel @Inject constructor(
     }
     private fun getAgents(){
         viewModelScope.launch {
-
             getAgentsUseCase.invoke().collect{
                 when (it){
 
@@ -133,8 +133,7 @@ viewModelScope.launch {
                 when (it){
                     is Resource.Success ->
                         homeState = homeState.copy(
-                            bundlesInfo = it.data,
-                            isLoading = false
+                            bundlesInfo = it.data
                         )
 
                     is Resource.Loading -> homeState = homeState.copy(

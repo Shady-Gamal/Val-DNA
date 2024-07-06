@@ -162,7 +162,7 @@ class ValorantEndtoEndTesting {
         assertTrue(drawerState.isOpen)
         composeRule.onNodeWithTag("NavDrawerList").onChildren().get(0).performClick()
         composeRule.waitUntilExactlyOneExists(hasText("Breach"), timeoutMillis = 5000)
-        composeRule.onNodeWithTag("Agents").performScrollToNode(hasText("Astra"))
+        composeRule.onNodeWithTag("A").performScrollToNode(hasText("Astra"))
         composeRule.onNodeWithText("Astra").performClick()
 
         val route = navController.currentDestination?.route

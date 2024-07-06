@@ -18,7 +18,7 @@ interface WebServices {
 
    @GET("bundles")
    suspend fun getBundles() : BundlesResponse
-@GET("buddies")
+   @GET("buddies")
    suspend fun getBuddies() : BuddiesResponse
 
    @GET("sprays")

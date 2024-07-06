@@ -36,7 +36,7 @@ fun AgentsLazyGrid(
 
 ) {
     LazyVerticalGrid(columns = GridCells.Fixed(2),
-        modifier = Modifier.testTag("Agents"), content = {
+        modifier = Modifier.testTag("A"), content = {
 
         items(agentsState.agentsInfo?.size ?: 0){
 
@@ -77,6 +77,7 @@ fun AgentsLazyGrid(
                         )
                         .fillMaxSize()
                         .clip(RoundedCornerShape(0.dp))
+                        .background(Color.Black.copy(.3f))
 
                 ) {
 

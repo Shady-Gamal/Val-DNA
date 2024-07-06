@@ -8,7 +8,7 @@ import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
 
-class GetAgentsUseCaseTest{
+class GetAUseCaseTest{
 
     private lateinit var getAgentsUseCase: GetAgentsUseCase
     private lateinit var fakeAgentsRepository: com.example.domain.data.repository.FakeAgentsRepository

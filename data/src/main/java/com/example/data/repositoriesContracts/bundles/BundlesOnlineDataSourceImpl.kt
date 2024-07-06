@@ -22,7 +22,6 @@ val context: Context) :
 
         try {
 
-
             val response = webServices.getBundles()
 
             response.data?.let { valorantDatabase.getBundlesDao().saveBundles(it) }

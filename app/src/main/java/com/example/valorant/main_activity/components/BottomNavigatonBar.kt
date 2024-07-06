@@ -53,7 +53,7 @@ fun BottomNavigationBar(navController: NavController) {
                 }
 
                                                                                }, icon = {
-                Icon (painter = painterResource(id = item.selectedIcon), contentDescription = item.title)
+                Icon (painter = painterResource(id = item.icon), contentDescription = item.title)
 
             }, label = {
                 Text(text = item.title)

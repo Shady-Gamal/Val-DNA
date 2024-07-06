@@ -23,6 +23,9 @@ data class MapsDataItem(
 	@field:SerializedName("displayName")
 	val displayName: String? = null,
 
+	@field:SerializedName("tacticalDescription")
+	val tacticalDescription: String? = null,
+
 	@field:SerializedName("listViewIcon")
 	val listViewIcon: String? = null,
 
@@ -38,6 +41,9 @@ data class MapsDataItem(
 	@PrimaryKey
 	@field:SerializedName("uuid")
 	val uuid: String,
+
+	@field:SerializedName("narrativeDescription")
+	val narrativeDescription: String? = null,
 
 	@field:SerializedName("displayIcon")
 	val displayIcon: String? = null,
@@ -85,7 +91,10 @@ fun MapsDataItem.toMapItemDTO() : MapItemDTO{
 		displayName = displayName,
 		mapUrl = mapUrl,
 		coordinates = coordinates,
-		displayIcon = displayIcon
+		displayIcon = displayIcon,
+		narrativeDescription = narrativeDescription,
+		tacticalDescription = tacticalDescription
+
 	)
 
 }
